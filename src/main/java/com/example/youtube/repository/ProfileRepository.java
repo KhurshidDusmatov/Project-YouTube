@@ -21,4 +21,6 @@ public interface ProfileRepository extends CrudRepository<ProfileEntity, Integer
     @Modifying
     @Query("update ProfileEntity  set password =:password where email =:email")
     int changePassword(@Param("password") String newPassword, @Param("email") String email);
+
+    Optional<ProfileEntity> findByEmail(String email);
 }
