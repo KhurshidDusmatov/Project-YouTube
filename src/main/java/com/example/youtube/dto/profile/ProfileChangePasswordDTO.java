@@ -2,9 +2,12 @@ package com.example.youtube.dto.profile;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import lombok.Getter;
+import lombok.Setter;
 
-public class ProfileChangeStatusDTO {
+@Getter
+@Setter
+public class ProfileChangePasswordDTO {
     @NotBlank(message = "email required")
     @NotNull(message = "email required")
     private String email;
