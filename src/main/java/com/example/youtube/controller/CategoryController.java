@@ -19,21 +19,17 @@ public class CategoryController {
     private final CategoryService categoryService;
 
     @PostMapping("/private")
-    public ResponseEntity<?> create(@RequestBody CategoryRequestDTO dto, HttpServletRequest request) {
-        JwtUtil.checkForRequiredRole(request);
+    public ResponseEntity<?> create(@RequestBody CategoryRequestDTO dto) {
         return ResponseEntity.ok(categoryService.create(dto));
     }
 
     @PutMapping("/private/{id}")
     public ResponseEntity<?> update(@PathVariable("id") String id,
-                                    @RequestParam("name") String name, HttpServletRequest request) {
-        JwtUtil.checkForRequiredRole(request);
+                                    @RequestParam("name") String name) {
         return ResponseEntity.ok(categoryService.update(id, name));
     }
     @DeleteMapping("/private/{id}")
-    public ResponseEntity<?>delete (@PathVariable("id")String id,
-                                    HttpServletRequest request){
-        JwtUtil.checkForRequiredRole(request);
+    public ResponseEntity<?>delete (@PathVariable("id")String id){
         return ResponseEntity.ok(categoryService.delete(id));
     }
 
