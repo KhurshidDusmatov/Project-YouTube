@@ -20,4 +20,6 @@ public class ProfileController {
     public ResponseEntity<?> changePassword(@RequestBody @Valid ProfileChangePasswordDTO dto){
         return ResponseEntity.ok(profileService.changePassword(dto));
     }
+
+
 }
