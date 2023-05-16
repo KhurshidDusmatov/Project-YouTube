@@ -1,0 +1,16 @@
+### category create
+POST localhost:9090/api/v1/category
+Content-Type: application/json
+
+{
+  "name": "music"
+}
+
+### categegory update
+PUT localhost:9090/api/v1/category/
+
+### category delete
+DELETE localhost:9090/api/v1/category/
+
+### category List
+GET localhost:9090/api/v1/category
