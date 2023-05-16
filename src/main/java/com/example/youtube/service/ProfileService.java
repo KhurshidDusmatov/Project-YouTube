@@ -1,12 +1,13 @@
 package com.example.youtube.service;
 
 import com.example.youtube.dto.profile.ProfileChangePasswordDTO;
+import com.example.youtube.dto.profile.ProfileDTO;
 import com.example.youtube.entity.ProfileEntity;
+import com.example.youtube.exps.AppBadRequestException;
 import com.example.youtube.exps.MethodNotAllowedException;
 import com.example.youtube.repository.ProfileRepository;
 import com.example.youtube.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -23,5 +24,30 @@ public class ProfileService {
         }
         int result = profileRepository.changePassword(MD5Util.getMd5Hash(dto.getNewPassword()), dto.getEmail());
         return true;
+    }
+
+    public Boolean changeDetail(String name, String surname, Integer ownerId) {
+        ProfileEntity entity = get(ownerId);
+        entity.setName(name);
+        entity.setSurname(surname);
+        profileRepository.save(entity);
+        return true;
+    }
+    public ProfileEntity get(Integer id){
+        Optional<ProfileEntity> optional = profileRepository.findById(id);
+        if (optional.isEmpty()) {
+            throw new AppBadRequestException("Profile not found");
+        }
+        return optional.get();
+    }
+
+    public ProfileDTO getAllDetail(Integer profileId) {
+        ProfileEntity entity = get(profileId);
+        ProfileDTO dto = new ProfileDTO();
+        dto.setId(entity.getId());
+        dto.setName(entity.getName());
+        dto.setSurname(entity.getSurname());
+        dto.setEmail(entity.getEmail());
+        return dto;
     }
 }
