@@ -23,4 +23,7 @@ public interface ProfileRepository extends CrudRepository<ProfileEntity, Integer
     int changePassword(@Param("password") String newPassword, @Param("email") String email);
 
     Optional<ProfileEntity> findByEmail(String email);
+
+
+    Optional<ProfileEntity> findByEmailAndPasswordAndVisible(String email, String md5Hash, boolean visible);
 }
