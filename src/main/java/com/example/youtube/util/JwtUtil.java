@@ -17,22 +17,22 @@ public class JwtUtil {
         private static final int tokenLiveTime = 1000 * 3600 * 24; // 1-day
         private static final String secretKey = "dasda143mazgi";
 
-    public static String encode(String text) {
-        JwtBuilder jwtBuilder = Jwts.builder();
-        jwtBuilder.setIssuedAt(new Date());
-        jwtBuilder.signWith(SignatureAlgorithm.HS512, secretKey);
-        jwtBuilder.claim("email", text);
-        jwtBuilder.setExpiration(new Date(System.currentTimeMillis() + (tokenLiveTime)));
-        jwtBuilder.setIssuer("Kunuz test portali");
-        return jwtBuilder.compact();
-    }
-
     public static String encode(String email, ProfileRole role) {
         JwtBuilder jwtBuilder = Jwts.builder();
         jwtBuilder.setIssuedAt(new Date());
         jwtBuilder.signWith(SignatureAlgorithm.HS512, secretKey);
         jwtBuilder.claim("email", email);
         jwtBuilder.claim("role", role);
+        jwtBuilder.setExpiration(new Date(System.currentTimeMillis() + (tokenLiveTime)));
+        jwtBuilder.setIssuer("Kunuz test portali");
+        return jwtBuilder.compact();
+    }
+
+    public static String encode(String text) {
+        JwtBuilder jwtBuilder = Jwts.builder();
+        jwtBuilder.setIssuedAt(new Date());
+        jwtBuilder.signWith(SignatureAlgorithm.HS512, secretKey);
+        jwtBuilder.claim("email", text);
         jwtBuilder.setExpiration(new Date(System.currentTimeMillis() + (tokenLiveTime)));
         jwtBuilder.setIssuer("Kunuz test portali");
         return jwtBuilder.compact();
@@ -48,6 +48,7 @@ public class JwtUtil {
         ProfileRole profileRole = ProfileRole.valueOf(role);
         return new JwtDTO(email, profileRole);
     }
+
 
     public static String decodeEmailVerification(String token) {
         try {

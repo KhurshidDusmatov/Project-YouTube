@@ -1,5 +1,7 @@
 package com.example.youtube;
 
+import com.example.youtube.enums.ProfileRole;
+import com.example.youtube.util.JwtUtil;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

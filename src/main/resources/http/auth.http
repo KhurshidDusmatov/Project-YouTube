@@ -1,11 +1,11 @@
-### Register
-POST localhost:8080/api/v1/auth/registration
-Content-Type: application/json
+### registration
+POST localhost:8081/api/v1/auth/registration
+Content-Type:  application/json
 
 {
-  "name": "Ali",
-  "surname": "Aliyev",
-  "email": "twiliodusmatov@gmail.com",
-  "phone": "990001122",
-  "password": "5555"
+  "name": "Elmurod",
+  "surname": "Shirinov",
+  "phone": "+998914082930",
+  "email": "shirinovelmurod@gmail.com",
+  "password": "123456"
 }
