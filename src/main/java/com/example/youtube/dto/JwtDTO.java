@@ -1,14 +1,14 @@
-package com.example.youtube.dto.jwt;
+package com.example.youtube.dto;
 
 import com.example.youtube.enums.ProfileRole;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-@Setter
 @Getter
+@Setter
 @AllArgsConstructor
 public class JwtDTO {
-    private String email;
+    private String mail;
     private ProfileRole role;
 }

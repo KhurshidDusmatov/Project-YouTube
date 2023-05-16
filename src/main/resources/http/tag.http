@@ -1,0 +1,23 @@
+### create tag
+POST localhost:8081/api/v1/tag/public
+Content-Type: application/json
+
+{
+  "name": "toshkent"
+}
+
+### update tag
+PUT localhost:8081/api/v1/tag/private/2
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQyMjg4NDMsImVtYWlsIjoic2hpcmlub3ZlbG11cm9kQGdtYWlsLmNvbSIsInJvbGUiOiJST0xFX0FETUlOIiwiZXhwIjoxNjg0MzE1MjQzLCJpc3MiOiJLdW51eiB0ZXN0IHBvcnRhbGkifQ.WswnmQPu1Jv1vFEvT5SDJMRcfiOQcjHxw-kRCrY8jvyh06COo1gugLDlWT_18L6BVPYk8ezXxSGJJkzXkSVvAg
+Content-Type: application/json
+
+{
+  "name": "dunyo"
+}
+
+### Delete tag
+DELETE localhost:8081/api/v1/tag/private/1
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQyMjg4NDMsImVtYWlsIjoic2hpcmlub3ZlbG11cm9kQGdtYWlsLmNvbSIsInJvbGUiOiJST0xFX0FETUlOIiwiZXhwIjoxNjg0MzE1MjQzLCJpc3MiOiJLdW51eiB0ZXN0IHBvcnRhbGkifQ.WswnmQPu1Jv1vFEvT5SDJMRcfiOQcjHxw-kRCrY8jvyh06COo1gugLDlWT_18L6BVPYk8ezXxSGJJkzXkSVvAg
+
+### Get list
+GET localhost:8081/api/v1/tag/public
