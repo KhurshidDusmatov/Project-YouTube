@@ -1,6 +1,5 @@
 package com.example.youtube.controller;
 
-import com.example.youtube.dto.auth.AuthResponseDTO;
 import com.example.youtube.dto.auth.RegistrationDTO;
 import com.example.youtube.dto.auth.RegistrationResponseDTO;
 import com.example.youtube.service.AuthService;

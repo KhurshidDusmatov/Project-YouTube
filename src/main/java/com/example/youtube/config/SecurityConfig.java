@@ -22,13 +22,14 @@ public class SecurityConfig {
     private UserDetailsService userDetailsService;
     @Autowired
     private TokenFilter tokenFilter;
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf().disable().cors().disable();
         http.addFilterBefore(tokenFilter, UsernamePasswordAuthenticationFilter.class);
         http.authorizeHttpRequests()
                 .requestMatchers(AUTH_WHITELIST).permitAll()
+//                .requestMatchers("/api/v1/*/private").hasRole("ADMIN")
+                .requestMatchers("/api/v1/*/private/*").hasRole("ADMIN")
                 .requestMatchers("/api/v1/*/private/**").hasRole("ADMIN")
 //                .requestMatchers("/api/v1/profile/adm/**").hasRole("ADMIN")
 //                .requestMatchers(HttpMethod.PUT, "/api/v1/article/private/*").hasAnyRole("MODERATOR", "ADMIN")
@@ -57,7 +58,6 @@ public class SecurityConfig {
             public String encode(CharSequence rawPassword) {
                 return rawPassword.toString();
             }
-
             @Override
             public boolean matches(CharSequence rawPassword, String encodedPassword) {
                 if (MD5Util.getMd5Hash(rawPassword.toString()).equals(encodedPassword)) {

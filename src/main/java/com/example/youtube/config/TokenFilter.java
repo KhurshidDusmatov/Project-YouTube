@@ -44,16 +44,6 @@ public class TokenFilter extends OncePerRequestFilter {
                                     FilterChain filterChain) throws ServletException, IOException {
         String authHeader = request.getHeader("Authorization");
         System.out.println("doFilter method");
-//        AntPathMatcher pathMatcher = new AntPathMatcher();
-//        boolean matched = Arrays.asList(SecurityConfig.AUTH_WHITELIST).stream()
-//                .anyMatch(p -> {
-//                    boolean match = pathMatcher.match(p, request.getServletPath());
-//                    return match;
-//                });
-//        if (matched){
-//            filterChain.doFilter(request, response);
-//            return;
-//        }
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             response.setHeader("Message", "Token not found");
