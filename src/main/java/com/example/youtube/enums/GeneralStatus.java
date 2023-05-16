@@ -1,5 +1,5 @@
 package com.example.youtube.enums;
 
 public enum GeneralStatus {
-    ACTIVE, REGISTER, BLOCK
+    ACTIVE, REGISTER, BLOCK 
 }
