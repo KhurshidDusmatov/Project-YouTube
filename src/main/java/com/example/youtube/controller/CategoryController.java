@@ -20,7 +20,7 @@ public class CategoryController {
     @PostMapping("/private")
     public ResponseEntity<?> create(@RequestBody CategoryRequestDTO dto, HttpServletRequest request) {
         JwtUtil.checkForRequiredRole(request);
-        // 
+        //
         return ResponseEntity.ok(categoryService.create(dto));
     }
 
