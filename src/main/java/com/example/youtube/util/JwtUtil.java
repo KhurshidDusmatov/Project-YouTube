@@ -1,6 +1,7 @@
 package com.example.youtube.util;
 
-import com.example.youtube.dto.jwt.JwtDTO;
+
+import com.example.youtube.dto.JwtDTO;
 import com.example.youtube.enums.ProfileRole;
 import com.example.youtube.exps.MethodNotAllowedException;
 import io.jsonwebtoken.*;
@@ -8,20 +9,13 @@ import jakarta.servlet.http.HttpServletRequest;
 
 import java.util.Date;
 
+
+import java.util.Date;
+
 public class JwtUtil {
 
-    private static final int tokenLiveTime = 1000 * 3600 * 24; // 1-day
-    private static final String secretKey = "dasda143mazgi";
-
-    public static String encode(String text) {
-        JwtBuilder jwtBuilder = Jwts.builder();
-        jwtBuilder.setIssuedAt(new Date());
-        jwtBuilder.signWith(SignatureAlgorithm.HS512, secretKey);
-        jwtBuilder.claim("email", text);
-        jwtBuilder.setExpiration(new Date(System.currentTimeMillis() + (tokenLiveTime)));
-        jwtBuilder.setIssuer("Kunuz test portali");
-        return jwtBuilder.compact();
-    }
+        private static final int tokenLiveTime = 1000 * 3600 * 24; // 1-day
+        private static final String secretKey = "dasda143mazgi";
 
     public static String encode(String email, ProfileRole role) {
         JwtBuilder jwtBuilder = Jwts.builder();
@@ -29,6 +23,16 @@ public class JwtUtil {
         jwtBuilder.signWith(SignatureAlgorithm.HS512, secretKey);
         jwtBuilder.claim("email", email);
         jwtBuilder.claim("role", role);
+        jwtBuilder.setExpiration(new Date(System.currentTimeMillis() + (tokenLiveTime)));
+        jwtBuilder.setIssuer("Kunuz test portali");
+        return jwtBuilder.compact();
+    }
+
+    public static String encode(String text) {
+        JwtBuilder jwtBuilder = Jwts.builder();
+        jwtBuilder.setIssuedAt(new Date());
+        jwtBuilder.signWith(SignatureAlgorithm.HS512, secretKey);
+        jwtBuilder.claim("email", text);
         jwtBuilder.setExpiration(new Date(System.currentTimeMillis() + (tokenLiveTime)));
         jwtBuilder.setIssuer("Kunuz test portali");
         return jwtBuilder.compact();
@@ -44,6 +48,7 @@ public class JwtUtil {
         ProfileRole profileRole = ProfileRole.valueOf(role);
         return new JwtDTO(email, profileRole);
     }
+
 
     public static String decodeEmailVerification(String token) {
         try {

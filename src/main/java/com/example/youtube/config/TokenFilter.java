@@ -2,7 +2,7 @@ package com.example.youtube.config;
 
 
 import com.example.youtube.config.SecurityConfig;
-import com.example.youtube.dto.jwt.JwtDTO;
+import com.example.youtube.dto.JwtDTO;
 import com.example.youtube.util.JwtUtil;
 import io.jsonwebtoken.JwtException;
 import jakarta.servlet.FilterChain;
@@ -44,16 +44,6 @@ public class TokenFilter extends OncePerRequestFilter {
                                     FilterChain filterChain) throws ServletException, IOException {
         String authHeader = request.getHeader("Authorization");
         System.out.println("doFilter method");
-//        AntPathMatcher pathMatcher = new AntPathMatcher();
-//        boolean matched = Arrays.asList(SecurityConfig.AUTH_WHITELIST).stream()
-//                .anyMatch(p -> {
-//                    boolean match = pathMatcher.match(p, request.getServletPath());
-//                    return match;
-//                });
-//        if (matched){
-//            filterChain.doFilter(request, response);
-//            return;
-//        }
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             response.setHeader("Message", "Token not found");
@@ -64,7 +54,7 @@ public class TokenFilter extends OncePerRequestFilter {
         JwtDTO jwtDTO;
         try {
             jwtDTO = JwtUtil.decode(token);
-            UserDetails userDetails = userDetailsService.loadUserByUsername(jwtDTO.getEmail());
+            UserDetails userDetails = userDetailsService.loadUserByUsername(jwtDTO.getMail());
             UsernamePasswordAuthenticationToken authentication =
                     new UsernamePasswordAuthenticationToken(
                             userDetails,
