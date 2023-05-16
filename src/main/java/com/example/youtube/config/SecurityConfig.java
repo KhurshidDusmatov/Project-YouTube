@@ -28,7 +28,7 @@ public class SecurityConfig {
         http.addFilterBefore(tokenFilter, UsernamePasswordAuthenticationFilter.class);
         http.authorizeHttpRequests()
                 .requestMatchers(AUTH_WHITELIST).permitAll()
-//                .requestMatchers("/api/v1/article/private").hasRole("USER")
+                .requestMatchers("/api/v1/profile/pro/**").hasRole("ROLE_USER")
 //                .requestMatchers("/api/v1/profile/adm/**").hasRole("ADMIN")
 //                .requestMatchers(HttpMethod.PUT, "/api/v1/article/private/*").hasAnyRole("MODERATOR", "ADMIN")
                 .anyRequest()
