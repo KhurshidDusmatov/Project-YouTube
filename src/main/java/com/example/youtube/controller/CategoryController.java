@@ -42,3 +42,8 @@ public class CategoryController {
         return ResponseEntity.ok(categoryService.getAll());
     }
 }
+/* Category
+    1. Create Category (ADMIN)  +++++
+    2. Update Category (ADMIN)  +++++
+    3. Delete Category (ADMIN)
+    4. Category List*/
