@@ -31,6 +31,7 @@ public class SecurityConfig {
                 .requestMatchers("/api/v1/profile/pro/**").hasRole("ROLE_USER")
 //                .requestMatchers("/api/v1/*/private").hasRole("ADMIN")
                 .requestMatchers("/api/v1/*/private/*").hasRole("ADMIN")
+                .requestMatchers("/api/v1/*/private/**").hasRole("ADMIN")
 //                .requestMatchers("/api/v1/profile/adm/**").hasRole("ADMIN")
 //                .requestMatchers(HttpMethod.PUT, "/api/v1/article/private/*").hasAnyRole("MODERATOR", "ADMIN")
                 .anyRequest()
