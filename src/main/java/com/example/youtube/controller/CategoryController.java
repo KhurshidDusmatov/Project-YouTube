@@ -19,7 +19,8 @@ public class CategoryController {
     private final CategoryService categoryService;
 
     @PostMapping("/private")
-    public ResponseEntity<?> create(@RequestBody CategoryRequestDTO dto) {
+    public ResponseEntity<?> create(@RequestBody CategoryRequestDTO dto, HttpServletRequest request) {
+        JwtUtil.checkForRequiredRole(request);
         return ResponseEntity.ok(categoryService.create(dto));
     }
 
