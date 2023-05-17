@@ -30,6 +30,9 @@ public class PlayListEntity {
     private VisibleStatus status;
     @Column(name = "order_num")
     private Integer orderNum;
+
+    @Column(name = "visible")
+    private Boolean visible;
     @Column(name = "created_date")
     private LocalDateTime createdDate;
 
