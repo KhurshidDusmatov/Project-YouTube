@@ -1,20 +1,21 @@
 ### registration
-POST localhost:8081/api/v1/auth/registration
+POST localhost:8080/api/v1/auth/registration
 Content-Type:  application/json
 
 {
-  "name": "Elmurod",
-  "surname": "Shirinov",
+  "name": "Xurshid",
+  "surname": "Dusmatov",
   "phone": "+998914082930",
-  "email": "shirinovelmurod@gmail.com",
-  "password": "123456"
+  "email": "dusmatov@gmail.com",
+  "password": "1111"
 }
 
+
 ### login
-POST localhost:8081/api/v1/auth
+POST localhost:8080/api/v1/auth
 Content-Type: application/json
 
 {
-  "email": "shirinovelmurod@gmail.com",
-  "password": "123456"
+  "email": "moder@gmail.com",
+  "password": "4444"
 }

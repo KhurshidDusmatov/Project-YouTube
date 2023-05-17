@@ -25,9 +25,11 @@ public class ProfileEntity {
     @Column(name = "password")
     private String password;
 
-    //    @OneToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "attach_id")
-//    private AttachEntity attach;
+    @Column(name = "attach_id")
+    private String attachId;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "attach_id", insertable = false, updatable = false)
+    private AttachEntity attach;
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
     private ProfileRole role;
