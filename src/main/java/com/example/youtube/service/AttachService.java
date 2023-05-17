@@ -1,7 +1,9 @@
 package com.example.youtube.service;
 
-import com.example.youtube.dto.AttachDTO;
+import com.example.youtube.dto.attach.AttachDTO;
+import com.example.youtube.dto.attach.AttachRequestDTO;
 import com.example.youtube.entity.AttachEntity;
+import com.example.youtube.exps.ItemNotFoundException;
 import com.example.youtube.repository.AttachRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,6 +17,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -58,7 +61,23 @@ public class AttachService {
         }
         return null;
     }
+    public AttachRequestDTO getAttachById(String id){
+        AttachEntity attachEntity = get(id);
+        AttachRequestDTO dto = new AttachRequestDTO();
+        dto.setId(attachEntity.getId());
+        dto.setOriginalName(attachEntity.getOriginalName());
+        String extension = getExtension(attachEntity.getOriginalName());
+        dto.setUrl(serverHost + "/api/v1/attach/open/" + attachEntity.getId() + "." + extension);
+        return dto;
+    }
 
+    private AttachEntity get(String id){
+        Optional<AttachEntity> byId = attachRepository.findById(id);
+        if (byId == null){
+            throw new ItemNotFoundException("Attach not found");
+        }
+        return byId.get();
+    }
     public String getExtension(String name){
         int lastIndex= name.lastIndexOf(".");
         return name.substring(lastIndex+1);

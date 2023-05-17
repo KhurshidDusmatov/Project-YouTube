@@ -1,16 +1,11 @@
 package com.example.youtube.controller;
 
-import com.example.youtube.dto.AttachDTO;
+import com.example.youtube.dto.attach.AttachDTO;
+import com.example.youtube.dto.attach.AttachRequestDTO;
 import com.example.youtube.service.AttachService;
-import com.example.youtube.util.JwtUtil;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 @RestController
@@ -22,5 +17,10 @@ public class AttachController {
    public ResponseEntity<AttachDTO> upload(@RequestParam("file") MultipartFile file) {
       AttachDTO fileName = attachService.upload(file);
       return ResponseEntity.ok().body(fileName);
+   }
+   @GetMapping("/public/getById/{id}")
+   public ResponseEntity<AttachRequestDTO> getById(@PathVariable("id") String id){
+      AttachRequestDTO attachById = attachService.getAttachById(id);
+      return ResponseEntity.ok(attachById);
    }
 }
