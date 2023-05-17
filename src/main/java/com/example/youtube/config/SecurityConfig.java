@@ -29,17 +29,9 @@ public class SecurityConfig {
         http.authorizeHttpRequests()
                 .requestMatchers(AUTH_WHITELIST).permitAll()
                 .requestMatchers("/api/v1/*/private/**").hasRole("ADMIN")
-//                .requestMatchers("/api/v1/*/private").hasRole("ADMIN")
                 .requestMatchers("/api/v1/*/private/*").hasRole("ADMIN")
                 .requestMatchers("/api/v1/attach/public/download").permitAll()
                 .requestMatchers("/api/v1/attach/public/getById").permitAll()
-                .requestMatchers("/api/v1/*/private/**").hasRole("ADMIN")
-//                .requestMatchers("/api/v1/*/private").hasRole("ADMIN")
-                .requestMatchers("/api/v1/*/private/*").hasRole("ADMIN")
-                .requestMatchers("/api/v1/attach/public/download").permitAll()
-                .requestMatchers("/api/v1/attach/public/getById").permitAll()
-//                .requestMatchers("/api/v1/profile/adm/**").hasRole("ADMIN")
-//                .requestMatchers(HttpMethod.PUT, "/api/v1/article/private/*").hasAnyRole("MODERATOR", "ADMIN")
                 .anyRequest()
                 .authenticated().and().httpBasic();
         return http.build();
