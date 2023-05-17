@@ -1,9 +1,9 @@
 package com.example.youtube.repository;
 
-import com.example.youtube.entity.EmailHistoryEntity;
+import com.example.youtube.entity.VideoTagEntity;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface EmailHistoryRepository extends CrudRepository<EmailHistoryEntity,Integer> {
+public interface VideoTagRepository extends CrudRepository<VideoTagEntity, Integer> {
 }

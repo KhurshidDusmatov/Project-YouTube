@@ -3,7 +3,26 @@ PUT localhost:8080/api/v1/profile/public/change-password
 Content-Type: application/json
 
 {
-  "email": "twiliodusmatov@gmail.com",
-  "oldPassword": "5555",
+  "email": "moder@gmail.com",
+  "oldPassword": "3333",
   "newPassword": "4444"
 }
+
+###
+POST localhost:8080/api/v1/profile/private/create
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQyNTQxMDksImVtYWlsIjoiYWRtaW5qb25AZ21haWwuY29tIiwicm9sZSI6IlJPTEVfQURNSU4iLCJleHAiOjE2ODQzNDA1MDksImlzcyI6Ikt1bnV6IHRlc3QgcG9ydGFsaSJ9.BZZgEtk1PKhmXV_JRiFcY7ZCun1KHns1M-3oHkItH8zqrms25aLpZcBGbA3xChpyKns37gfWO4YEGr3iIBG9dg
+Content-Type: application/json
+
+{
+  "name": "Moder",
+  "surname": "Moderjanov",
+  "email": "moder@gmail.com",
+  "password": "3333",
+  "role": "ROLE_MODERATOR"
+}
+
+
+### Get all detail
+GET localhost:8080/api/v1/profile/get-all-detail
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQzMDYyODQsImVtYWlsIjoibW9kZXJAZ21haWwuY29tIiwicm9sZSI6IlJPTEVfTU9ERVJBVE9SIiwiZXhwIjoxNjg0MzkyNjg0LCJpc3MiOiJLdW51eiB0ZXN0IHBvcnRhbGkifQ.-82uz9WtJRCdWK5RZzF9zrerzdNX7CyP9_Db2Cbu9boIqas_S5jhdXJGwj0Q8d-PkNdabQMajIpqTjisItrsTA
+
