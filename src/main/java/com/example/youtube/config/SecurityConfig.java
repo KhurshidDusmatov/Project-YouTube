@@ -36,12 +36,10 @@ public class SecurityConfig {
                 .authenticated().and().httpBasic();
         return http.build();
     }
-
     public static String[] AUTH_WHITELIST = {"/api/v1/*/public/**",
             "/api/v1/auth/**",
             "/api/v1/auth"
     };
-
     @Bean
     public AuthenticationProvider authenticationProvider() {
         final DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
@@ -49,7 +47,6 @@ public class SecurityConfig {
         authenticationProvider.setPasswordEncoder(passwordEncoder());
         return authenticationProvider;
     }
-
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new PasswordEncoder() {
