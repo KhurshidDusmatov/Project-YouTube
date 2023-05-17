@@ -1,14 +1,11 @@
 package com.example.youtube.util;
 
 
-import com.example.youtube.dto.JwtDTO;
+import com.example.youtube.dto.jwt.JwtDTO;
 import com.example.youtube.enums.ProfileRole;
 import com.example.youtube.exps.MethodNotAllowedException;
 import io.jsonwebtoken.*;
 import jakarta.servlet.http.HttpServletRequest;
-
-import java.util.Date;
-
 
 import java.util.Date;
 
