@@ -16,24 +16,20 @@ import org.springframework.web.bind.annotation.*;
 public class ProfileController {
     @Autowired
     private ProfileService profileService;
-
     @PutMapping("/public/change-password")
     public ResponseEntity<?> changePassword(@RequestBody @Valid ProfileChangePasswordDTO dto){
         return ResponseEntity.ok(profileService.changePassword(dto));
     }
-
     @PutMapping("/change-detail")
     public ResponseEntity<?> changeDetail(@Param("name") String name, @Param("surname") String surname){
         Boolean result = profileService.changeDetail(name, surname, SpringSecurityUtil.getProfileId());
         return ResponseEntity.ok(result);
     }
-
     @GetMapping("/get-all-detail")
     public ResponseEntity<?> getAllDetail(){
         ProfileDTO dto = profileService.getAllDetail(SpringSecurityUtil.getProfileId());
         return ResponseEntity.ok(dto);
     }
-
     @PostMapping("private/create")
     public ResponseEntity<?> create(@RequestBody ProfileCreateRequestDTO dto){
        return ResponseEntity.ok(profileService.create(dto));
