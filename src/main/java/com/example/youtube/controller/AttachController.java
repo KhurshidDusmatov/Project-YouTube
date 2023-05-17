@@ -4,6 +4,8 @@ import com.example.youtube.dto.attach.AttachDTO;
 import com.example.youtube.dto.attach.AttachRequestDTO;
 import com.example.youtube.service.AttachService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -23,4 +25,12 @@ public class AttachController {
       AttachRequestDTO attachById = attachService.getAttachById(id);
       return ResponseEntity.ok(attachById);
    }
+
+   @GetMapping("/public/download/{fileName}")
+   public ResponseEntity<Resource> download(@PathVariable("fileName") String fileName) {
+      Resource file = attachService.download(fileName);
+      return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
+              "attachment; filename=\"" + file.getFilename() + "\"").body(file);
+   }
+
 }
