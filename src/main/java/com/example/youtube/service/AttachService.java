@@ -7,11 +7,14 @@ import com.example.youtube.exps.ItemNotFoundException;
 import com.example.youtube.repository.AttachRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -70,7 +73,23 @@ public class AttachService {
         dto.setUrl(serverHost + "/api/v1/attach/open/" + attachEntity.getId() + "." + extension);
         return dto;
     }
+    public Resource download(String fileName) {
+        try {
+//            int lastIndex = fileName.lastIndexOf(".");
+//            String id = fileName.substring(0, lastIndex+1);
+            AttachEntity attachEntity = get(fileName);
 
+            Path file = Paths.get("attaches/" + attachEntity.getPath() + "/" + fileName);
+            Resource resource = new UrlResource(file.toUri());
+            if (resource.exists() || resource.isReadable()) {
+                return resource;
+            } else {
+                throw new RuntimeException("Could not read the file!");
+            }
+        } catch (MalformedURLException e) {
+            throw new RuntimeException("Error: " + e.getMessage());
+        }
+    }
     private AttachEntity get(String id){
         Optional<AttachEntity> byId = attachRepository.findById(id);
         if (byId == null){
