@@ -18,8 +18,8 @@ import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Calendar;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -102,9 +102,9 @@ public class AttachService {
         return name.substring(lastIndex+1);
     }
     public String getYmDString() {
-        int year = LocalDate.EPOCH.getYear();
-        int month =LocalDate.EPOCH.getMonthValue()+1;
-        int day = LocalDate.EPOCH.getDayOfMonth();
+        int year = Calendar.YEAR;
+        int month =Calendar.MONTH+1;
+        int day = Calendar.DAY_OF_MONTH;
         return year + "/" + month + "/" + day; // 2022/04/23
     }
 }
