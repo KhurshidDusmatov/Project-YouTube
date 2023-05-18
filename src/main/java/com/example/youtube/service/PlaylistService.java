@@ -7,8 +7,9 @@ import com.example.youtube.entity.PlayListEntity;
 import com.example.youtube.enums.ProfileRole;
 import com.example.youtube.enums.VisibleStatus;
 import com.example.youtube.exps.AppBadRequestException;
+import com.example.youtube.exps.MethodNotAllowedException;
 import com.example.youtube.repository.PlaylistRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
@@ -19,9 +20,11 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class PlaylistService {
-    @Autowired
-    private PlaylistRepository playlistRepository;
+
+    private final PlaylistRepository playlistRepository;
+    private final ChannelService channelService;
     public PlayListInfoDTO create(PlayListRequestDTO dto, Integer prtId) {
         checkRequiredOwner(dto.getChannelId(), prtId);
         PlayListEntity entity = new PlayListEntity();
@@ -63,9 +66,9 @@ public class PlaylistService {
     }
 
     private void checkRequiredOwner(String channelId, Integer prtId) {
-//        if (){
-//            throw new MethodNotAllowedException("You have not permission");
-//        }
+        if (!channelService.get(channelId).getProfileId().equals(prtId)) {
+            throw new MethodNotAllowedException("Not allowed for you");
+        }
     }
     public PlayListEntity get(Integer id){
         Optional<PlayListEntity> entity = playlistRepository.findById(id);
