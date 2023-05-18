@@ -23,6 +23,11 @@ public class SecurityConfig {
     @Autowired
     private TokenFilter tokenFilter;
 
+    public static String[] AUTH_WHITELIST = {"/api/v1/*/public/**",
+            "/api/v1/auth/**",
+            "/api/v1/auth"
+    };
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf().disable().cors().disable();
@@ -33,16 +38,14 @@ public class SecurityConfig {
                 .requestMatchers("/api/v1/comment/public/**").hasAnyRole("USER","ADMIN","OWNER")
                 .requestMatchers("/api/v1/*/private").hasRole("ADMIN")
                 .requestMatchers("/api/v1/*/private/*").hasRole("ADMIN")
+                .requestMatchers("/api/v1/channel/private/*").hasRole("USER")
                 .requestMatchers("/api/v1/attach/public/download").permitAll()
                 .requestMatchers("/api/v1/attach/public/getById").permitAll()
                 .anyRequest()
                 .authenticated().and().httpBasic();
         return http.build();
     }
-    public static String[] AUTH_WHITELIST = {"/api/v1/*/public/**",
-            "/api/v1/auth/**",
-            "/api/v1/auth"
-    };
+
     @Bean
     public AuthenticationProvider authenticationProvider() {
         final DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();

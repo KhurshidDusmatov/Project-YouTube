@@ -8,6 +8,7 @@ import com.example.youtube.enums.GeneralStatus;
 import com.example.youtube.exps.AppBadRequestException;
 import com.example.youtube.exps.ItemNotFoundException;
 import com.example.youtube.repository.ChannelRepository;
+import com.example.youtube.util.SpringSecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,8 +25,9 @@ public class ChannelService {
     @Autowired
     private AttachService attachService;
 
-    public ChannelDTO create(ChannelDTO channelDTO,Integer userId){
-        ChannelEntity entity=new ChannelEntity();
+    public ChannelDTO create(ChannelDTO channelDTO) {
+        Integer userId = SpringSecurityUtil.getProfileId();
+        ChannelEntity entity = new ChannelEntity();
         entity.setName(channelDTO.getName());
         entity.setBanner(attachService.get(channelDTO.getBannerId()));
         entity.setBannerId(channelDTO.getBannerId());
@@ -40,38 +42,60 @@ public class ChannelService {
         channelDTO.setId(entity.getId());
         return channelDTO;
     }
-    public Boolean update(String id,ChannelDTO channelDTO,Integer userId){
+
+    public Boolean update(String id, ChannelDTO channelDTO) {
+        Integer userId = SpringSecurityUtil.getProfileId();
         ChannelEntity entity = get(id);
-        if (!entity.getProfileId().equals(userId) || !entity.getStatus().equals(GeneralStatus.ACTIVE)){
+        if (!entity.getProfileId().equals(userId) || !entity.getStatus().equals(GeneralStatus.ACTIVE)) {
             throw new AppBadRequestException("Channel required");
         }
         entity.setName(channelDTO.getName());
         entity.setDescription(channelDTO.getDescription());
         return channelRepository.update(entity.getName(), entity.getDescription(), id);
     }
-    public Boolean updatePhoto(String id,ChannelDTO channelDTO,Integer userId){
+
+    public Boolean updatePhoto(String id, ChannelDTO channelDTO) {
+        Integer userId = SpringSecurityUtil.getProfileId();
         ChannelEntity entity = get(id);
-        if (!entity.getProfileId().equals(userId) || !entity.getStatus().equals(GeneralStatus.ACTIVE)){
+        if (!entity.getProfileId().equals(userId) || !entity.getStatus().equals(GeneralStatus.ACTIVE)) {
             throw new AppBadRequestException("Channel required");
         }
         entity.setPhoto(attachService.get(channelDTO.getPhotoId()));
         entity.setPhotoId(channelDTO.getPhotoId());
         return channelRepository.updatePhoto(channelDTO.getPhotoId(), id);
     }
-    public Boolean updateBanner(String id,ChannelDTO channelDTO,Integer userId){
+
+    public Boolean updateBanner(String id, ChannelDTO channelDTO) {
+        Integer userId = SpringSecurityUtil.getProfileId();
         ChannelEntity entity = get(id);
-        if (!entity.getProfileId().equals(userId) || !entity.getStatus().equals(GeneralStatus.ACTIVE)){
+        if (!entity.getProfileId().equals(userId) || !entity.getStatus().equals(GeneralStatus.ACTIVE)) {
             throw new AppBadRequestException("Channel required");
         }
         entity.setBanner(attachService.get(channelDTO.getBannerId()));
         entity.setBannerId(channelDTO.getBannerId());
         return channelRepository.updateBanner(channelDTO.getBannerId(), id);
     }
-    public ChannelEntity get(String id){
+
+    public ChannelDTO getChanelById(String id) {
+        ChannelEntity entity = get(id);
+        ChannelDTO dto = new ChannelDTO();
+        return null;
+    }
+
+    public ChannelEntity get(String id) {
         Optional<ChannelEntity> byId = channelRepository.findById(id);
-        if (byId == null){
+        if (byId == null) {
             throw new ItemNotFoundException("Channel not found");
         }
         return byId.get();
     }
+
+    public ChannelDTO toChannelDTO(ChannelEntity entity) {
+        ChannelDTO dto = new ChannelDTO();
+        dto.setId(entity.getId());
+        dto.setDescription(entity.getDescription());
+        dto.setName(entity.getName());
+        return null;
+    }
+
 }
