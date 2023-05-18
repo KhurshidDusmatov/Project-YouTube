@@ -12,7 +12,6 @@ import lombok.Setter;
 public class ChannelEntity {
     @Id
     private String id;
-
     @Column(name = "name")
     private String name;
 

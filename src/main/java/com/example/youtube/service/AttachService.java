@@ -2,6 +2,7 @@ package com.example.youtube.service;
 
 import com.example.youtube.dto.attach.AttachDTO;
 import com.example.youtube.dto.attach.AttachRequestDTO;
+import com.example.youtube.dto.attach.AttachResponseDTO;
 import com.example.youtube.entity.AttachEntity;
 import com.example.youtube.exps.ItemNotFoundException;
 import com.example.youtube.repository.AttachRepository;
@@ -31,6 +32,7 @@ public class AttachService {
     private String folderName;
     @Value("${server.host}")
     private String serverHost;
+
     public AttachDTO upload(MultipartFile file) {
         try {
             String pathFolder = getYmDString(); // 2022/04/23
@@ -64,7 +66,8 @@ public class AttachService {
         }
         return null;
     }
-    public AttachRequestDTO getAttachById(String id){
+
+    public AttachRequestDTO getAttachById(String id) {
         AttachEntity attachEntity = get(id);
         AttachRequestDTO dto = new AttachRequestDTO();
         dto.setId(attachEntity.getId());
@@ -73,6 +76,7 @@ public class AttachService {
         dto.setUrl(serverHost + "/api/v1/attach/open/" + attachEntity.getId() + "." + extension);
         return dto;
     }
+
     public Resource download(String fileName) {
         try {
 //            int lastIndex = fileName.lastIndexOf(".");
@@ -90,21 +94,31 @@ public class AttachService {
             throw new RuntimeException("Error: " + e.getMessage());
         }
     }
-    private AttachEntity get(String id){
+
+    private AttachEntity get(String id) {
         Optional<AttachEntity> byId = attachRepository.findById(id);
-        if (byId == null){
+        if (byId == null) {
             throw new ItemNotFoundException("Attach not found");
         }
         return byId.get();
     }
-    public String getExtension(String name){
-        int lastIndex= name.lastIndexOf(".");
-        return name.substring(lastIndex+1);
+
+    public String getExtension(String name) {
+        int lastIndex = name.lastIndexOf(".");
+        return name.substring(lastIndex + 1);
     }
+
     public String getYmDString() {
         int year = LocalDate.EPOCH.getYear();
-        int month =LocalDate.EPOCH.getMonthValue()+1;
+        int month = LocalDate.EPOCH.getMonthValue() + 1;
         int day = LocalDate.EPOCH.getDayOfMonth();
         return year + "/" + month + "/" + day; // 2022/04/23
+    }
+
+    public AttachResponseDTO toResponseDTO(AttachEntity entity) {
+        AttachResponseDTO dto = new AttachResponseDTO();
+        dto.setId(entity.getId());
+        dto.setUrl(entity.getPath());
+        return dto;
     }
 }

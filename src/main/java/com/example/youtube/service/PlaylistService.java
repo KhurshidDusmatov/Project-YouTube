@@ -3,6 +3,7 @@ package com.example.youtube.service;
 import com.example.youtube.dto.playlist.PlayListInfoDTO;
 import com.example.youtube.dto.playlist.PlayListRequestDTO;
 import com.example.youtube.dto.playlist.PlayListUpdateStatusDTO;
+import com.example.youtube.dto.playlist.PlayResponseDTO;
 import com.example.youtube.entity.PlayListEntity;
 import com.example.youtube.enums.ProfileRole;
 import com.example.youtube.enums.VisibleStatus;
@@ -25,6 +26,9 @@ public class PlaylistService {
 
     private final PlaylistRepository playlistRepository;
     private final ChannelService channelService;
+    @Autowired
+    private PlaylistRepository playlistRepository;
+
     public PlayListInfoDTO create(PlayListRequestDTO dto, Integer prtId) {
         checkRequiredOwner(dto.getChannelId(), prtId);
         PlayListEntity entity = new PlayListEntity();
@@ -46,13 +50,15 @@ public class PlaylistService {
         playlistRepository.updateStatus(dto.getStatus(), dto.getId());
         return true;
     }
+
     public Boolean delete(Integer id, Integer prtId, ProfileRole role) {
-        if (role.equals(ProfileRole.ROLE_ADMIN) || Objects.equals(get(id).getChannel().getProfileId(), prtId)){
+        if (role.equals(ProfileRole.ROLE_ADMIN) || Objects.equals(get(id).getChannel().getProfileId(), prtId)) {
             playlistRepository.deletePlaylist(id);
             return true;
         }
         return false;
     }
+
     public Page<PlayListInfoDTO> pagination(Integer page, Integer size) {
         Sort sort = Sort.by(Sort.Direction.ASC, "id");
         Pageable pageable = PageRequest.of(page - 1, size, sort);
@@ -70,14 +76,16 @@ public class PlaylistService {
             throw new MethodNotAllowedException("Not allowed for you");
         }
     }
-    public PlayListEntity get(Integer id){
+
+    public PlayListEntity get(Integer id) {
         Optional<PlayListEntity> entity = playlistRepository.findById(id);
-        if (entity.isEmpty()){
+        if (entity.isEmpty()) {
             throw new AppBadRequestException("Item not found");
         }
         return entity.get();
     }
-    private PlayListInfoDTO toDTO(PlayListEntity entity){
+
+    private PlayListInfoDTO toDTO(PlayListEntity entity) {
         PlayListInfoDTO dto = new PlayListInfoDTO();
         dto.setId(entity.getId());
         dto.setChannelId(entity.getChannelId());
@@ -88,7 +96,8 @@ public class PlaylistService {
         dto.setCreatedDate(entity.getCreatedDate());
         return dto;
     }
-    public PlayListEntity toEntity(PlayListRequestDTO dto, PlayListEntity entity){
+
+    public PlayListEntity toEntity(PlayListRequestDTO dto, PlayListEntity entity) {
         entity.setChannelId(dto.getChannelId());
         entity.setName(dto.getName());
         entity.setDescription(dto.getDescription());
