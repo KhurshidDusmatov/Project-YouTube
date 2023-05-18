@@ -1,6 +1,7 @@
 ### category create
 POST localhost:9090/api/v1/category
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQyNTQ5NDUsImVtYWlsIjoib2t0YW0xOTYyQG1haWwucnUiLCJyb2xlIjoiUk9MRV9BRE1JTiIsImV4cCI6MTY4NDM0MTM0NSwiaXNzIjoiS3VudXogdGVzdCBwb3J0YWxpIn0.lNPNwSeapmtuxNH7esUQmINzH6czYYvr7slIIfh7nvOPrl-MaL_Obls0KI6RCP--VrzGgu9M25hf9sly7NOqXg
 
 {
   "name": "music"
@@ -8,9 +9,12 @@ Content-Type: application/json
 
 ### categegory update
 PUT localhost:9090/api/v1/category/
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQyMjg4NDMsImVtYWlsIjoic2hpcmlub3ZlbG11cm9kQGdtYWlsLmNvbSIsInJvbGUiOiJST0xFX0FETUlOIiwiZXhwIjoxNjg0MzE1MjQzLCJpc3MiOiJLdW51eiB0ZXN0IHBvcnRhbGkifQ.WswnmQPu1Jv1vFEvT5SDJMRcfiOQcjHxw-kRCrY8jvyh06COo1gugLDlWT_18L6BVPYk8ezXxSGJJkzXkSVvAg
 
 ### category delete
 DELETE localhost:9090/api/v1/category/
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQyMjg4NDMsImVtYWlsIjoic2hpcmlub3ZlbG11cm9kQGdtYWlsLmNvbSIsInJvbGUiOiJST0xFX0FETUlOIiwiZXhwIjoxNjg0MzE1MjQzLCJpc3MiOiJLdW51eiB0ZXN0IHBvcnRhbGkifQ.WswnmQPu1Jv1vFEvT5SDJMRcfiOQcjHxw-kRCrY8jvyh06COo1gugLDlWT_18L6BVPYk8ezXxSGJJkzXkSVvAg
+
 
 ### category List
 GET localhost:9090/api/v1/category
