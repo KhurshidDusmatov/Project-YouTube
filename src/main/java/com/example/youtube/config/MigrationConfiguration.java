@@ -21,7 +21,6 @@ public class MigrationConfiguration {
         dataSourceBuilder.url(dataSourceUrl);
         dataSourceBuilder.username(dataSourceUsername);
         dataSourceBuilder.password(dataSourcePassword);
-        //
         return dataSourceBuilder.build();
     }
 }
