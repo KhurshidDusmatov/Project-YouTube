@@ -2,9 +2,13 @@ package com.example.youtube.entity;
 
 import com.example.youtube.enums.GeneralStatus;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "channel")
+@Getter
+@Setter
 public class ChannelEntity {
     //id(uuid),name,photo,description,status (ACTIVE, BLOCK),banner,profile_id
     @Id

@@ -33,7 +33,7 @@ public class AttachService {
     private String serverHost;
     public AttachDTO upload(MultipartFile file) {
         try {
-            String pathFolder = getYmDString(); // 2022/04/23
+            String pathFolder = getYmDString(); // 2022/05/15
             File folder = new File("attaches/" + pathFolder);  // attaches/2023/04/26
             if (!folder.exists()) {
                 folder.mkdirs();
@@ -51,7 +51,7 @@ public class AttachService {
             attachRepository.save(attachEntity);
 
             Path path = Paths.get("attaches/" + pathFolder + "/" + attachEntity.getId() + "." + extension);
-            // attaches/2023/04/26/uuid().jpg
+            // attaches/2023/05/15/uuid().jpg
             Files.write(path, bytes);
 
             AttachDTO dto = new AttachDTO();
@@ -75,11 +75,11 @@ public class AttachService {
     }
     public Resource download(String fileName) {
         try {
-//            int lastIndex = fileName.lastIndexOf(".");
-//            String id = fileName.substring(0, lastIndex+1);
+            int lastIndex = fileName.lastIndexOf(".");
+            String id = fileName.substring(0, lastIndex);
             AttachEntity attachEntity = get(fileName);
 
-            Path file = Paths.get("attaches/" + attachEntity.getPath() + "/" + fileName);
+            Path file = Paths.get("attaches/" + attachEntity.getPath() +"/"+id+ "/" + fileName);
             Resource resource = new UrlResource(file.toUri());
             if (resource.exists() || resource.isReadable()) {
                 return resource;
@@ -90,7 +90,7 @@ public class AttachService {
             throw new RuntimeException("Error: " + e.getMessage());
         }
     }
-    private AttachEntity get(String id){
+    public AttachEntity get(String id){
         Optional<AttachEntity> byId = attachRepository.findById(id);
         if (byId == null){
             throw new ItemNotFoundException("Attach not found");
@@ -102,9 +102,9 @@ public class AttachService {
         return name.substring(lastIndex+1);
     }
     public String getYmDString() {
-        int year = Calendar.YEAR;
-        int month =Calendar.MONTH+1;
-        int day = Calendar.DAY_OF_MONTH;
+        int year = Calendar.getInstance().get(Calendar.YEAR);
+        int month =Calendar.getInstance().get(Calendar.MONTH)+1;
+        int day = Calendar.getInstance().get(Calendar.DATE);
         return year + "/" + month + "/" + day; // 2022/04/23
     }
 }
