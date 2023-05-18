@@ -18,9 +18,9 @@ public class VideoTagEntity {
     private Integer id;
     @Column(name = "video_id")
     private String videoId;
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "video_id", insertable = false, updatable = false)
-//    private VideoEntity video; @Column(name = "video_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "video_id", insertable = false, updatable = false)
+    private VideoEntity video;
     @Column(name = "tag_id")
     private Integer tagId;
     @ManyToOne(fetch = FetchType.LAZY)

@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "video")
@@ -20,19 +21,19 @@ public class VideoEntity {
     @Column(name = "preview_attach_id")
     private String previewAttachId;
     @OneToOne
-    @JoinColumn(name = "preview_attach_id")
+    @JoinColumn(name = "preview_attach_id", insertable = false, updatable = false)
     private AttachEntity previewAttach;
     @Column(name = "title")
     private String title;
     @Column(name = "category_id")
-    private Integer categoryId;
+    private String categoryId;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id")
+    @JoinColumn(name = "category_id", insertable = false, updatable = false)
     private CategoryEntity category;
     @Column(name = "attach_id")
     private String attachId;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "attach_id")
+    @JoinColumn(name = "attach_id", insertable = false, updatable = false)
     private AttachEntity attach;
     @Column(name = "created_date")
     private LocalDateTime createdDate = LocalDateTime.now();
@@ -43,17 +44,20 @@ public class VideoEntity {
     @Enumerated(EnumType.STRING)
     private VideoType type;
     @Column(name = "view_count")
-    private Integer viewCount;
+    private Integer viewCount = 0;
     @Column(name = "shared_count")
     private Integer sharedCount;
     @Column(name = "description")
     private String description;
     @Column(name = "channel_id")
-    private Integer channelId;
-    // TODO: 5/17/2023 channel
+    private String channelId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "channel_id", insertable = false, updatable = false)
+    private ChannelEntity channel;
     @Column(name = "like_count")
-    private Integer likeCount;
+    private Integer likeCount = 0;
     @Column(name = "dislike_count")
-    private Integer dislikeCount;
-
+    private Integer dislikeCount = 0;
+    @OneToMany
+    private List<TagEntity> tagList;
 }

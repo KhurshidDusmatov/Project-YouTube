@@ -58,4 +58,11 @@ public class TagService {
         entityList.forEach(entity -> list.add(toResponseDTO(entity)));
         return list;
     }
+
+    public TagResponseDTO tagResponseDTO(TagEntity entity) {
+        TagResponseDTO dto = new TagResponseDTO();
+        dto.setId(entity.getId());
+        dto.setName(entity.getName());
+        return dto;
+    }
 }

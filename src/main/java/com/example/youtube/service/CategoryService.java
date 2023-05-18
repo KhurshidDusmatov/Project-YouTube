@@ -1,6 +1,7 @@
 package com.example.youtube.service;
 
 import com.example.youtube.dto.category.CategoryRequestDTO;
+import com.example.youtube.dto.category.CategoryResponseDTO;
 import com.example.youtube.entity.CategoryEntity;
 import com.example.youtube.exps.CategoryNotFoundException;
 import com.example.youtube.repository.CategoryRepository;
@@ -52,5 +53,12 @@ public class CategoryService {
             response.add(dto);
         });
         return response;
+    }
+
+    public CategoryResponseDTO toResponseDTO(CategoryEntity entity) {
+        CategoryResponseDTO dto = new CategoryResponseDTO();
+        dto.setId(entity.getId());
+        dto.setName(entity.getName());
+        return dto;
     }
 }
