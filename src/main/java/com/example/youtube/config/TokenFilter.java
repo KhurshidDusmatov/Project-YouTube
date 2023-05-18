@@ -1,7 +1,8 @@
 package com.example.youtube.config;
 
 
-import com.example.youtube.dto.jwt.JwtDTO;
+import com.example.youtube.config.SecurityConfig;
+import com.example.youtube.dto.JwtDTO;
 import com.example.youtube.util.JwtUtil;
 import io.jsonwebtoken.JwtException;
 import jakarta.servlet.FilterChain;
@@ -34,9 +35,7 @@ public class TokenFilter extends OncePerRequestFilter {
                 .anyMatch(p -> {
                     boolean match = pathMatcher.match(p, request.getServletPath());
                     return match;
-                });
-    }
-
+                });}
     @Override
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
