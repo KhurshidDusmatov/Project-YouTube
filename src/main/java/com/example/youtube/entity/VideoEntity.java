@@ -25,7 +25,7 @@ public class VideoEntity {
     @Column(name = "title")
     private String title;
     @Column(name = "category_id")
-    private Integer categoryId;
+    private String categoryId;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", insertable=false, updatable=false)
     private CategoryEntity category;
@@ -50,7 +50,9 @@ public class VideoEntity {
     private String description;
     @Column(name = "channel_id")
     private String channelId;
-    // TODO: 5/17/2023 channel
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "channel_id", insertable=false, updatable=false)
+    private ChannelEntity channel;
     @Column(name = "like_count")
     private Integer likeCount;
     @Column(name = "dislike_count")
