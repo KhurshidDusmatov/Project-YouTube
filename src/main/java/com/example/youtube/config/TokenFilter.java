@@ -1,8 +1,8 @@
 package com.example.youtube.config;
 
 
-import com.example.youtube.config.SecurityConfig;
-import com.example.youtube.dto.JwtDTO;
+
+import com.example.youtube.dto.jwt.JwtDTO;
 import com.example.youtube.util.JwtUtil;
 import io.jsonwebtoken.JwtException;
 import jakarta.servlet.FilterChain;

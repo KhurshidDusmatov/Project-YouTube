@@ -26,8 +26,7 @@ public class PlaylistService {
 
     private final PlaylistRepository playlistRepository;
     private final ChannelService channelService;
-    @Autowired
-    private PlaylistRepository playlistRepository;
+
 
     public PlayListInfoDTO create(PlayListRequestDTO dto, Integer prtId) {
         checkRequiredOwner(dto.getChannelId(), prtId);

@@ -2,6 +2,7 @@ package com.example.youtube.service;
 
 import com.example.youtube.dto.attach.AttachDTO;
 import com.example.youtube.dto.attach.AttachRequestDTO;
+import com.example.youtube.dto.attach.AttachResponseDTO;
 import com.example.youtube.entity.AttachEntity;
 import com.example.youtube.exps.ItemNotFoundException;
 import com.example.youtube.repository.AttachRepository;
@@ -92,7 +93,7 @@ public class AttachService {
         }
     }
 
-    private AttachEntity get(String id) {
+    public AttachEntity get(String id) {
         Optional<AttachEntity> byId = attachRepository.findById(id);
         if (byId == null){
             throw new ItemNotFoundException("Attach not found");

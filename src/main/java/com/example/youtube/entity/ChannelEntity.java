@@ -9,8 +9,6 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "channel")
-@Getter
-@Setter
 public class ChannelEntity {
     //id(uuid),name,photo,description,status (ACTIVE, BLOCK),banner,profile_id
     @Id
