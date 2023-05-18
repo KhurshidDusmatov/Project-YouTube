@@ -34,13 +34,11 @@ public class SecurityConfig {
         http.addFilterBefore(tokenFilter, UsernamePasswordAuthenticationFilter.class);
         http.authorizeHttpRequests()
                 .requestMatchers(AUTH_WHITELIST).permitAll()
+                .requestMatchers("/api/v1/channel/private/*").hasRole("USER")
                 .requestMatchers("/api/v1/*/private/**").hasRole("ADMIN")
                 .requestMatchers("/api/v1/comment/public/**").hasAnyRole("USER","ADMIN","OWNER")
                 .requestMatchers("/api/v1/*/private").hasRole("ADMIN")
                 .requestMatchers("/api/v1/*/private/*").hasRole("ADMIN")
-                .requestMatchers("/api/v1/channel/private/*").hasRole("USER")
-                .requestMatchers("/api/v1/attach/public/download").permitAll()
-                .requestMatchers("/api/v1/attach/public/getById").permitAll()
                 .anyRequest()
                 .authenticated().and().httpBasic();
         return http.build();
