@@ -25,7 +25,7 @@ public class VideoEntity {
     @Column(name = "title")
     private String title;
     @Column(name = "category_id")
-    private Integer categoryId;
+    private String categoryId;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", insertable=false, updatable=false)
     private CategoryEntity category;
