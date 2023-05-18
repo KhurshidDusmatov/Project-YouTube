@@ -23,4 +23,7 @@ public interface ChannelRepository extends CrudRepository<ChannelEntity,String> 
     @Modifying
     @Query("update ChannelEntity set bannerId=:photo where id=:id")
     Boolean updateBanner(@Param("photo") String photo,@Param("id") String id);
+import org.springframework.data.repository.CrudRepository;
+
+public interface ChannelRepository extends CrudRepository<ChannelEntity, String> {
 }
