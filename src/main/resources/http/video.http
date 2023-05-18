@@ -1,0 +1,15 @@
+### create
+POST localhost:8081/api/v1/video
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQzNDc5NzgsImVtYWlsIjoic2hpcmlub3ZlbG11cm9kQGdtYWlsLmNvbSIsInJvbGUiOiJST0xFX0FETUlOIiwiZXhwIjoxNjg0NDM0Mzc4LCJpc3MiOiJLdW51eiB0ZXN0IHBvcnRhbGkifQ.T6J1P4Dm9KIHF3jgbg-dva9IoNxYiGMACrtri4IJmgKB1KW6VQPs27n-5rU4IT3UxiTsJuSqhApab6d1DDD7eA
+Content-Type: application/json
+
+{
+  "previewAttachId": "NfiUWBGNFIKLF",
+  "title": "qwerty",
+  "categoryId": "wqdwv",
+  "attachId": "shiGfbujk",
+  "status": "PUBLIC",
+  "type": "VIDEO",
+  "description": "vagagag",
+  "channelId": "faf"
+}

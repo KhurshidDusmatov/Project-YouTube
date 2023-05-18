@@ -18,6 +18,7 @@ import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Optional;
@@ -33,7 +34,7 @@ public class AttachService {
     private String serverHost;
     public AttachDTO upload(MultipartFile file) {
         try {
-            String pathFolder = getYmDString(); // 2022/05/15
+            String pathFolder = getYmDString(); // 2022/04/23
             File folder = new File("attaches/" + pathFolder);  // attaches/2023/04/26
             if (!folder.exists()) {
                 folder.mkdirs();
@@ -75,11 +76,11 @@ public class AttachService {
     }
     public Resource download(String fileName) {
         try {
-            int lastIndex = fileName.lastIndexOf(".");
-            String id = fileName.substring(0, lastIndex);
+//            int lastIndex = fileName.lastIndexOf(".");
+//            String id = fileName.substring(0, lastIndex+1);
             AttachEntity attachEntity = get(fileName);
 
-            Path file = Paths.get("attaches/" + attachEntity.getPath() +"/"+id+ "/" + fileName);
+            Path file = Paths.get("attaches/" + attachEntity.getPath() + "/" + fileName);
             Resource resource = new UrlResource(file.toUri());
             if (resource.exists() || resource.isReadable()) {
                 return resource;
@@ -90,7 +91,8 @@ public class AttachService {
             throw new RuntimeException("Error: " + e.getMessage());
         }
     }
-    public AttachEntity get(String id){
+
+    private AttachEntity get(String id) {
         Optional<AttachEntity> byId = attachRepository.findById(id);
         if (byId == null){
             throw new ItemNotFoundException("Attach not found");
@@ -106,5 +108,12 @@ public class AttachService {
         int month =Calendar.getInstance().get(Calendar.MONTH)+1;
         int day = Calendar.getInstance().get(Calendar.DATE);
         return year + "/" + month + "/" + day; // 2022/04/23
+    }
+
+    public AttachResponseDTO toResponseDTO(AttachEntity entity) {
+        AttachResponseDTO dto = new AttachResponseDTO();
+        dto.setId(entity.getId());
+        dto.setUrl(entity.getPath());
+        return dto;
     }
 }

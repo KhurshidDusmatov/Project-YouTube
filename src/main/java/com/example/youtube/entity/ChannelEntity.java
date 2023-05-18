@@ -15,7 +15,6 @@ public class ChannelEntity {
     //id(uuid),name,photo,description,status (ACTIVE, BLOCK),banner,profile_id
     @Id
     private String id;
-
     @Column(name = "name")
     private String name;
 

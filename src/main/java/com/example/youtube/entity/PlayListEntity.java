@@ -35,7 +35,4 @@ public class PlayListEntity {
     private Boolean visible;
     @Column(name = "created_date")
     private LocalDateTime createdDate;
-
-
-
 }

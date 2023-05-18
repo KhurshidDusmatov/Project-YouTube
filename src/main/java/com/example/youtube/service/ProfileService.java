@@ -3,6 +3,7 @@ package com.example.youtube.service;
 import com.example.youtube.dto.profile.ProfileChangePasswordDTO;
 import com.example.youtube.dto.profile.ProfileCreateRequestDTO;
 import com.example.youtube.dto.profile.ProfileDTO;
+import com.example.youtube.dto.profile.ProfileResponseDTO;
 import com.example.youtube.entity.ProfileEntity;
 import com.example.youtube.enums.GeneralStatus;
 import com.example.youtube.exps.AppBadRequestException;
@@ -22,7 +23,7 @@ public class ProfileService {
 
     public Boolean changePassword(ProfileChangePasswordDTO dto) {
         Optional<ProfileEntity> optional = profileRepository.findByEmailAndPassword(dto.getEmail(), MD5Util.getMd5Hash(dto.getOldPassword()));
-        if (optional.isEmpty()){
+        if (optional.isEmpty()) {
             throw new MethodNotAllowedException("Password or Email error");
         }
         profileRepository.changePassword(MD5Util.getMd5Hash(dto.getNewPassword()), dto.getEmail());
@@ -36,7 +37,8 @@ public class ProfileService {
         profileRepository.save(entity);
         return true;
     }
-    public ProfileEntity get(Integer id){
+
+    public ProfileEntity get(Integer id) {
         Optional<ProfileEntity> optional = profileRepository.findById(id);
         if (optional.isEmpty()) {
             throw new AppBadRequestException("Profile not found");
@@ -53,6 +55,7 @@ public class ProfileService {
         dto.setEmail(entity.getEmail());
         return dto;
     }
+
     public ProfileDTO create(ProfileCreateRequestDTO dto) {
         ProfileEntity entity = new ProfileEntity();
         entity.setName(dto.getName());
@@ -66,7 +69,8 @@ public class ProfileService {
         profileRepository.save(entity);
         return toDTO(entity);
     }
-    private ProfileDTO toDTO(ProfileEntity entity){
+
+    private ProfileDTO toDTO(ProfileEntity entity) {
         ProfileDTO dto = new ProfileDTO();
         dto.setId(entity.getId());
         dto.setName(entity.getName());
@@ -77,6 +81,14 @@ public class ProfileService {
         dto.setRole(entity.getRole());
         dto.setVisible(entity.getVisible());
         dto.setCreatedDate(entity.getCreatedDate());
+        return dto;
+    }
+
+    public ProfileResponseDTO toResponseDTO(ProfileEntity entity) {
+        ProfileResponseDTO dto = new ProfileResponseDTO();
+        dto.setId(entity.getId());
+        dto.setName(entity.getName());
+        dto.setSurname(entity.getSurname());
         return dto;
     }
 }
