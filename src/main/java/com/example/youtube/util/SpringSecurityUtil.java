@@ -1,6 +1,7 @@
 package com.example.youtube.util;
 
 import com.example.youtube.config.security.CustomUserDetails;
+import com.example.youtube.enums.ProfileRole;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,5 +22,10 @@ public class SpringSecurityUtil {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         CustomUserDetails userDetails = (CustomUserDetails )authentication.getPrincipal();
         return userDetails.getProfileEntity().getId();
+    }
+    public static ProfileRole getProfileRole() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        CustomUserDetails userDetails = (CustomUserDetails )authentication.getPrincipal();
+        return userDetails.getProfileEntity().getRole();
     }
 }
