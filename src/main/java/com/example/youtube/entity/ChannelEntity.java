@@ -9,6 +9,8 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "channel")
+@Getter
+@Setter
 public class ChannelEntity {
     @Id
     private String id;
