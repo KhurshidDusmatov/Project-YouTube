@@ -1,5 +1,6 @@
 ### Create Channel
-POST localhost:8080/api/v1/channel/public/create
+POST localhost:8080/api/v1/channel/private/create
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQ0MjA3OTQsImVtYWlsIjoiVVNFUkBtYWlsLnJ1Iiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTY4NDUwNzE5NCwiaXNzIjoiS3VudXogdGVzdCBwb3J0YWxpIn0.vsDk2O_hbvNNYmwI3OnskMxex6GI5nm-q2CmR7okO6cwj8yD1I6JZ7EpZhoBl1dJM3snj5FoIb9tlOgzyxDgxA
 Content-Type: application/json
 
 {

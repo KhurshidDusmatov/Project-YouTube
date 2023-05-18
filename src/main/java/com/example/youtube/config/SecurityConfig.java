@@ -17,6 +17,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @EnableWebSecurity
 @Configuration
+
 public class SecurityConfig {
     @Autowired
     private UserDetailsService userDetailsService;

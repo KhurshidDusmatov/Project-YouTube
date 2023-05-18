@@ -1,20 +1,20 @@
 ### registration
-POST localhost:9090/api/v1/auth/registration
+POST localhost:8080/api/v1/auth/registration
 Content-Type:  application/json
 
 {
   "name": "Bobir",
   "surname": "Baxshilloyev",
   "phone": "+998936529454",
-  "email": "oktam1962@mail.ru",
-  "password": "123456"
+  "email": "USER@mail.ru",
+  "password": "12345"
 }
 
 ### login
-POST localhost:9090/api/v1/auth
+POST localhost:8080/api/v1/auth
 Content-Type: application/json
 
 {
-  "email": "oktam1962@mail.ru",
-  "password": "123456"
+  "email": "USER@mail.ru",
+  "password": "12345"
 }
