@@ -3,6 +3,7 @@ package com.example.youtube.controller;
 import com.example.youtube.dto.attach.AttachDTO;
 import com.example.youtube.dto.attach.AttachRequestDTO;
 import com.example.youtube.service.AttachService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -32,6 +33,10 @@ AttachController {
       Resource file = attachService.download(fileName);
       return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
               "attachment; filename=\"" + file.getFilename() + "\"").body(file);
+   }
+   @DeleteMapping("/private/deleteById/{id}")
+   public ResponseEntity<?> deleteById(@PathVariable("id") String id){
+      return ResponseEntity.ok(attachService.delete(id));
    }
 
 }

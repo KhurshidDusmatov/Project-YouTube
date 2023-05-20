@@ -78,8 +78,8 @@ public class ChannelService {
 
     public ChannelDTO getChanelById(String id) {
         ChannelEntity entity = get(id);
-        ChannelDTO dto = new ChannelDTO();
-        return null;
+        ChannelDTO dto = toChannelDTO(entity);
+        return dto;
     }
 
     public ChannelEntity get(String id) {
@@ -95,7 +95,22 @@ public class ChannelService {
         dto.setId(entity.getId());
         dto.setDescription(entity.getDescription());
         dto.setName(entity.getName());
-        return null;
+        dto.setPhotoId(entity.getPhotoId());
+        dto.setBannerId(entity.getBannerId());
+        return dto;
     }
 
+    public Boolean updateStatus(String id){
+        Integer userId = SpringSecurityUtil.getProfileId();
+        ChannelEntity entity = get(id);
+        if (!entity.getProfileId().equals(userId)){
+            throw new AppBadRequestException("Channel required");
+        }
+        if (entity.getStatus().equals(GeneralStatus.ACTIVE)){
+        return channelRepository.updateStatus(GeneralStatus.BLOCK,entity.getId());
+        }else if (entity.getStatus().equals(GeneralStatus.BLOCK)){
+            return channelRepository.updateStatus(GeneralStatus.BLOCK, entity.getId());
+        }
+        return false;
+    }
 }

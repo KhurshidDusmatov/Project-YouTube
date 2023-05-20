@@ -36,7 +36,10 @@ public class SecurityConfig {
         http.addFilterBefore(tokenFilter, UsernamePasswordAuthenticationFilter.class);
         http.authorizeHttpRequests()
                 .requestMatchers(AUTH_WHITELIST).permitAll()
-                .requestMatchers("/api/v1/channel/private/*").hasRole("USER")
+                .requestMatchers("/api/v1/channel/private/**").hasRole("USER")
+                .requestMatchers("/api/v1/attach/private/deleteById/**").hasRole("ADMIN")
+                .requestMatchers("/api/v1/channel/private/update/**").hasRole("USER")
+                .requestMatchers("/api/v1/channel/private/update_photo/**").hasRole("USER")
                 .requestMatchers("/api/v1/*/private/**").hasRole("ADMIN")
                 .requestMatchers("/api/v1/comment/public/**").hasAnyRole("USER","ADMIN","OWNER")
                 .requestMatchers("/api/v1/*/private").hasRole("ADMIN")
