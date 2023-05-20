@@ -1,5 +1,5 @@
 package com.example.youtube.enums;
 
-public enum CommentLikeType {
+public enum EmotionType {
     LIKE,DISLIKE
 }

@@ -1,0 +1,10 @@
+### like
+GET localhost:9091/api/v1/video-like/public/like/
+
+### dislike
+GET localhost:9091/api/v1/video-like/public/dislike/
+
+### delete
+DELETE localhost:9091/api/v1/video-like/public/delete/
+
+

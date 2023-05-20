@@ -9,22 +9,26 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
+@Table(name = "video_like")
 @Entity
-@Table(name = "comment_like")
-public class CommentLikeEntity {
+public class VideoLikeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @JoinColumn(name = "profile_id")
+    @JoinColumn(name = "profile_id",insertable = false,updatable = false)
     @ManyToOne(fetch = FetchType.LAZY)
     private ProfileEntity profile;
-    @JoinColumn(name = "comment_id")
+    @Column(name = "profile_id")
+    private Integer profileId;
+    @JoinColumn(name = "video_id",insertable = false,updatable = false)
     @ManyToOne(fetch = FetchType.LAZY)
-    private CommentEntity comment;
+    private VideoEntity video;
+    @Column(name = "vide0_id")
+    private String videoId;
     @Column(name = "created_date")
-    private LocalDateTime createdDate = LocalDateTime.now();
+    private LocalDateTime createdDate;
     @Enumerated(value = EnumType.STRING)
     @Column(name = "type")
     private EmotionType type;
+
 }
-//id,profile_id,comment_id,created_date,type(Like,Dislike)
