@@ -1,6 +1,6 @@
 ### create
 POST localhost:8081/api/v1/video
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQzNDc5NzgsImVtYWlsIjoic2hpcmlub3ZlbG11cm9kQGdtYWlsLmNvbSIsInJvbGUiOiJST0xFX0FETUlOIiwiZXhwIjoxNjg0NDM0Mzc4LCJpc3MiOiJLdW51eiB0ZXN0IHBvcnRhbGkifQ.T6J1P4Dm9KIHF3jgbg-dva9IoNxYiGMACrtri4IJmgKB1KW6VQPs27n-5rU4IT3UxiTsJuSqhApab6d1DDD7eA
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQ1NzkyMzIsImVtYWlsIjoic2hpcmlub3ZlbG11cm9kQGdtYWlsLmNvbSIsInJvbGUiOiJST0xFX0FETUlOIiwiZXhwIjoxNjg0NjY1NjMyLCJpc3MiOiJLdW51eiB0ZXN0IHBvcnRhbGkifQ.-rPiwUFIVYsCjMdi9YB9vkJejVrWaA2dN6Znk1qTD0mQ8T82ln_OHYPIv8mfTLTuJc29slvnEZVeEwnmj-D3Ww
 Content-Type: application/json
 
 {
@@ -13,3 +13,19 @@ Content-Type: application/json
   "description": "vagagag",
   "channelId": "faf"
 }
+
+### Change status 3 ++
+PUT localhost:8081/api/v1/video/change-status/e10adc3949ba59abbe56e057f20f883e
+
+### search 6 ++
+GET localhost:8081/api/v1/video/search-by-title/a
+
+### Increase video_view Count by id 4 ++
+PUT localhost:8081/api/v1/video/e10adc3949ba59abbe56e057f20f883e
+
+### get 8 ++
+GET localhost:8081/api/v1/video/video-paging-by-category?id=e10adc3949ba59abbe56e057f20f883e&page=1&size=2
+
+### paging 9-10 ++
+GET localhost:8081/api/v1/video/private/paging?size=1&page=1
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQ1NzkyMzIsImVtYWlsIjoic2hpcmlub3ZlbG11cm9kQGdtYWlsLmNvbSIsInJvbGUiOiJST0xFX0FETUlOIiwiZXhwIjoxNjg0NjY1NjMyLCJpc3MiOiJLdW51eiB0ZXN0IHBvcnRhbGkifQ.-rPiwUFIVYsCjMdi9YB9vkJejVrWaA2dN6Znk1qTD0mQ8T82ln_OHYPIv8mfTLTuJc29slvnEZVeEwnmj-D3Ww

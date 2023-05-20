@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @EnableWebSecurity
 @Configuration
+@EnableMethodSecurity
 public class SecurityConfig {
     @Autowired
     private UserDetailsService userDetailsService;
@@ -28,6 +30,7 @@ public class SecurityConfig {
         http.addFilterBefore(tokenFilter, UsernamePasswordAuthenticationFilter.class);
         http.authorizeHttpRequests()
                 .requestMatchers(AUTH_WHITELIST).permitAll()
+                .requestMatchers("ap1/v1/video").hasRole("ADMIN")
                 .requestMatchers("/api/v1/*/private/**").hasRole("ADMIN")
                 .requestMatchers("/api/v1/*/private/*").hasRole("ADMIN")
                 .requestMatchers("/api/v1/attach/public/download").permitAll()
@@ -38,7 +41,10 @@ public class SecurityConfig {
     }
     public static String[] AUTH_WHITELIST = {"/api/v1/*/public/**",
             "/api/v1/auth/**",
-            "/api/v1/auth"
+            "/api/v1/auth",
+            "/api/v1/video/**",
+            "/api/v1/video/video-paging-by-category**",
+            "/api/v1/video/change-status/*"
     };
     @Bean
     public AuthenticationProvider authenticationProvider() {
