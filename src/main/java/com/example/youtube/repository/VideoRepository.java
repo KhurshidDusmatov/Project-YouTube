@@ -19,4 +19,7 @@ public interface VideoRepository extends CrudRepository<VideoEntity, String>,
 
     @Query("select v from VideoEntity v where v.id=:id and v.status='PRIVATE'")
     Optional<VideoEntity> getById(@Param("id") String id);
+
+    @Query("select v.viewCount from VideoEntity v where v.id=:id")
+    Integer getViewCount(@Param("id") String id);
 }

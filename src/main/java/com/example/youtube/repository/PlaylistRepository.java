@@ -8,9 +8,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Repository;
 
-@Repository
+import javax.swing.text.html.Option;
+import java.util.List;
+import java.util.Optional;
+
+
 public interface PlaylistRepository extends CrudRepository<PlayListEntity, Integer>,
         PagingAndSortingRepository<PlayListEntity, Integer> {
     @Transactional
@@ -22,4 +25,10 @@ public interface PlaylistRepository extends CrudRepository<PlayListEntity, Integ
     @Modifying
     @Query("update PlayListEntity set visible = false where id =:id")
     int deletePlaylist(@Param("id") Integer id);
+
+    @Query("from PlayListEntity where channelId =:channelId order by orderNum desc")
+    List<PlayListEntity> getByChannelId(@Param("channelId") String id);
+
+    @Query("from PlayListEntity where id =:id and visible = true")
+    Optional<PlayListEntity> getById(@Param("id") Integer id);
 }

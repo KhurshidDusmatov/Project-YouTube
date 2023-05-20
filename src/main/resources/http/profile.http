@@ -14,11 +14,11 @@ Authorization: eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQ1ODQyNjksImVtYWlsIjoic290aWJv
 Content-Type: application/json
 
 {
-  "name": "Moder",
+  "name": "USER",
   "surname": "Moderjanov",
-  "email": "moder@gmail.com",
+  "email": "user@gmail.ru",
   "password": "3333",
-  "role": "ROLE_MODERATOR"
+  "role": "ROLE_USER"
 }
 
 

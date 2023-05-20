@@ -1,7 +1,8 @@
 ### category create
-POST localhost:9090/api/v1/category
+POST localhost:8080/api/v1/category
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQyNTQ5NDUsImVtYWlsIjoib2t0YW0xOTYyQG1haWwucnUiLCJyb2xlIjoiUk9MRV9BRE1JTiIsImV4cCI6MTY4NDM0MTM0NSwiaXNzIjoiS3VudXogdGVzdCBwb3J0YWxpIn0.lNPNwSeapmtuxNH7esUQmINzH6czYYvr7slIIfh7nvOPrl-MaL_Obls0KI6RCP--VrzGgu9M25hf9sly7NOqXg
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQ1NzQ0NTgsImVtYWlsIjoiYWRtaW5qb25AZ21haWwuY29tIiwicm9sZSI6IlJPTEVfQURNSU4iLCJleHAiOjE2ODQ2NjA4NTgsImlzcyI6Ikt1bnV6IHRlc3QgcG9ydGFsaSJ9.jIKmUhCznGuM_uYveQX384-9EFAmNFEdpQNcGzGe7XBAEmQfevBShMyM5MEyQOuayFBTO3jMrmtQzJekP-uUFg
+
 
 {
   "name": "music"
