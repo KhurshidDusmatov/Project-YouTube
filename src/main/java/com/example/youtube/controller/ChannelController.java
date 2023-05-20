@@ -1,9 +1,8 @@
 package com.example.youtube.controller;
 
+import com.example.youtube.dto.attach.AttachDTO;
 import com.example.youtube.dto.channel.ChannelDTO;
 import com.example.youtube.service.ChannelService;
-import com.example.youtube.util.JwtUtil;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +17,7 @@ public class ChannelController {
     public ResponseEntity<ChannelDTO> create(@RequestBody ChannelDTO dto) {
         return ResponseEntity.ok(channelService.create(dto));
     }
-    @PutMapping("/public/{id}")
+    @PutMapping("/private/update/{id}")
     public ResponseEntity<?> update(@PathVariable("id") String id,
                                     @RequestBody ChannelDTO dto) {
         return ResponseEntity.ok(channelService.update(id,dto));
@@ -32,5 +31,13 @@ public class ChannelController {
     public ResponseEntity<?> updateBanner(@PathVariable("id") String id,
                                          @RequestBody ChannelDTO dto) {
         return ResponseEntity.ok(channelService.updateBanner(id,dto));
+    }
+    @GetMapping("/private/getById/{id}")
+    public ResponseEntity<ChannelDTO> getById(@PathVariable("id") String id){
+        return ResponseEntity.ok(channelService.getChanelById(id));
+    }
+    @PutMapping("/private/update_status/{id}")
+    public ResponseEntity<?> updateStatus(@PathVariable("id") String id) {
+        return ResponseEntity.ok(channelService.updateStatus(id));
     }
 }
