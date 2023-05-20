@@ -1,1 +1,36 @@
 POST localhost:8080/ap1/v1/playlist/create
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQ1OTEwNjQsImVtYWlsIjoiVVNFUkBtYWlsLnJ1Iiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTY4NDY3NzQ2NCwiaXNzIjoiS3VudXogdGVzdCBwb3J0YWxpIn0.I1dyF7P4QoX4Ov6VykDDmJIltLPs7wD52gy2zT4fvPXGNf94gBGzoVHRGx1qtLBYzsNuKSsMOQkzcRWlH6gXvA
+
+{
+  "channelId": "2",
+  "name": "Oop",
+  "description": "Opp conceps",
+  "status": "PUBLIC",
+  "orderNum": 7
+}
+
+###
+PUT localhost:8080/ap1/v1/playlist/update?id=10
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQ1OTEwNjQsImVtYWlsIjoiVVNFUkBtYWlsLnJ1Iiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTY4NDY3NzQ2NCwiaXNzIjoiS3VudXogdGVzdCBwb3J0YWxpIn0.I1dyF7P4QoX4Ov6VykDDmJIltLPs7wD52gy2zT4fvPXGNf94gBGzoVHRGx1qtLBYzsNuKSsMOQkzcRWlH6gXvA
+
+{
+  "channelId": "2",
+  "name": "Java Lessons",
+  "description": "About OOP",
+  "status": "PUBLIC",
+  "orderNum": 8
+}
+###
+PUT localhost:8080/ap1/v1/playlist/update-status
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQ1OTEwNjQsImVtYWlsIjoiVVNFUkBtYWlsLnJ1Iiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTY4NDY3NzQ2NCwiaXNzIjoiS3VudXogdGVzdCBwb3J0YWxpIn0.I1dyF7P4QoX4Ov6VykDDmJIltLPs7wD52gy2zT4fvPXGNf94gBGzoVHRGx1qtLBYzsNuKSsMOQkzcRWlH6gXvA
+
+{
+  "id": 11,
+  "status": "PRIVATE"
+}
+
+
+

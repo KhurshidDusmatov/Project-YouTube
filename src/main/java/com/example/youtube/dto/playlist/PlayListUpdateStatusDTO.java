@@ -12,6 +12,6 @@ public class PlayListUpdateStatusDTO {
 
     @NotNull
     private Integer id;
-    @NotBlank
+    @NotNull
     private VisibleStatus status;
 }

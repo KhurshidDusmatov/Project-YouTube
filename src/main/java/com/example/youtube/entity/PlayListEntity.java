@@ -18,7 +18,7 @@ public class PlayListEntity {
     private Integer id;
     @Column(name = "channel_id")
     private String channelId;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "channel_id", insertable = false, updatable = false)
     private ChannelEntity channel;
     @Column(name = "name")
