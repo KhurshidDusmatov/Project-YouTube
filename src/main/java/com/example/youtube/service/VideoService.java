@@ -24,6 +24,7 @@ public class VideoService {
     private final PlaylistService playlistService;
 
     private final ProfileService profileService;
+    private final ChannelService channelService;
 
     public VideoEntity get(String id) {
         Optional<VideoEntity> optional = videoRepository.findById(id);
@@ -73,10 +74,10 @@ public class VideoService {
         return toResponseDTO(entity);
     }
 
-    public VideoResponseDTO videoViewCountById(String id) {
+    public Integer videoViewCountById(String id) {
         VideoEntity entity = get(id);
-        VideoEntity video = videoRepository.videoViewCountById(id, entity.getViewCount() + 1);
-        return toResponseDTO(video);
+        int video = videoRepository.videoViewCountById(id, entity.getViewCount() + 1);
+        return video;
     }
 
     public Page<VideoShortInfo> videoPagingByCategoryId(String categoryId, int size, int page) {
@@ -85,7 +86,11 @@ public class VideoService {
         Page<VideoEntity> videoPaging = videoRepository.findAll(pageable);
         List<VideoEntity> entityList = videoPaging.getContent();
         List<VideoShortInfo> list = new LinkedList<>();
-        entityList.forEach(entity -> list.add(toShortInfo(entity)));
+        for (VideoEntity entity : entityList) {
+            if (entity.getCategoryId().equals(categoryId)) {
+                list.add(toShortInfo(entity));
+            }
+        }
         long totalCount = list.size();
         return new PageImpl<>(list, pageable, totalCount);
     }
@@ -95,7 +100,7 @@ public class VideoService {
         dto.setId(entity.getId());
         dto.setPublishedDate(entity.getPublishedDate());
         dto.setViewCount(entity.getViewCount());
-        dto.setPreviewAttach(attachService.toResponseDTO(entity.getPreviewAttach()));
+//        dto.setPreviewAttach(attachService.toResponseDTO(entity.getPreviewAttach()));
 //        dto.setChannel();
         return dto;
     }
@@ -145,7 +150,7 @@ public class VideoService {
         List<VideoDTO> dtoList = new LinkedList<>();
         for (VideoEntity entity : entityList) {
             VideoDTO dto = new VideoDTO();
-            dto.setOwner(profileService.toResponseDTO(entity.getChannel().getProfile()));
+//            dto.setOwner(profileService.toResponseDTO(entity.getChannel().getProfile()));
             dto.setVideoShortInfo(toShortInfo(entity));
 //            dto.setPlayList(playlistService.toPlayResponseDTO());
             // TODO: 5/18/2023 playList
@@ -171,5 +176,12 @@ public class VideoService {
             list.add(videoPlayListInfo);
         }
         return new PageImpl<>(list, pageable, totalCount);
+    }
+    public VideoLikeRequestDTO getVideoLikeRequestDto(VideoEntity video) {
+        VideoLikeRequestDTO dto=new VideoLikeRequestDTO();
+        dto.setId(video.getId());
+        dto.setName(video.getTitle());
+        dto.setDto(channelService.getChanelVideoLikeRequestDto(video.getChannel()));
+        return dto;
     }
 }

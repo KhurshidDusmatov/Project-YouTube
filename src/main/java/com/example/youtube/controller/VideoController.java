@@ -6,6 +6,7 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,6 +19,7 @@ public class VideoController {
 
     // 1
     @PostMapping
+//    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<VideoResponseDTO> create(@RequestBody @Valid VideoRequestDTO dto) {
         VideoResponseDTO response = videoService.create(dto);
         return ResponseEntity.ok(response);
@@ -32,8 +34,8 @@ public class VideoController {
 
     // 4
     @PutMapping("/{id}")
-    public ResponseEntity<VideoResponseDTO> videoViewCountById(@PathVariable String id) {
-        VideoResponseDTO response = videoService.videoViewCountById(id);
+    public ResponseEntity<?> videoViewCountById(@PathVariable String id) {
+        Integer response = videoService.videoViewCountById(id);
         return ResponseEntity.ok(response);
     }
 
@@ -62,6 +64,7 @@ public class VideoController {
 
     // 9
     @GetMapping("/private/paging")
+//    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Page<VideoDTO>> pagingAdmin(@RequestParam("size") int size, @RequestParam("page") int page) {
         Page<VideoDTO> response = videoService.pagingAdmin(size, page);
         return ResponseEntity.ok(response);

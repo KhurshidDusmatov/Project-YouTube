@@ -2,6 +2,7 @@ package com.example.youtube.service;
 
 import com.example.youtube.config.security.CustomUserDetails;
 import com.example.youtube.config.security.CustomUserDetailsService;
+import com.example.youtube.dto.channel.ChanelVideoLikeRequestDTO;
 import com.example.youtube.dto.channel.ChannelDTO;
 import com.example.youtube.entity.ChannelEntity;
 import com.example.youtube.enums.GeneralStatus;
@@ -98,4 +99,10 @@ public class ChannelService {
         return null;
     }
 
+    public ChanelVideoLikeRequestDTO getChanelVideoLikeRequestDto(ChannelEntity channel) {
+        ChanelVideoLikeRequestDTO dto = new ChanelVideoLikeRequestDTO();
+        dto.setId(channel.getId());
+        dto.setName(channel.getName());
+        return dto;
+    }
 }

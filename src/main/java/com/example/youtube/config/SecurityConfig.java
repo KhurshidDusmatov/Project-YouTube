@@ -24,18 +24,13 @@ public class SecurityConfig {
     private UserDetailsService userDetailsService;
     @Autowired
     private TokenFilter tokenFilter;
-
-    public static String[] AUTH_WHITELIST = {"/api/v1/*/public/**",
-            "/api/v1/auth/**",
-            "/api/v1/auth"
-    };
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf().disable().cors().disable();
         http.addFilterBefore(tokenFilter, UsernamePasswordAuthenticationFilter.class);
         http.authorizeHttpRequests()
                 .requestMatchers(AUTH_WHITELIST).permitAll()
+                .requestMatchers("ap1/v1/video").hasRole("ADMIN")
                 .requestMatchers("/api/v1/channel/private/*").hasRole("USER")
                 .requestMatchers("/api/v1/*/private/**").hasRole("ADMIN")
                 .requestMatchers("/api/v1/comment/public/**").hasAnyRole("USER","ADMIN","OWNER")
@@ -46,6 +41,13 @@ public class SecurityConfig {
         return http.build();
     }
 
+    public static String[] AUTH_WHITELIST = {"/api/v1/*/public/**",
+            "/api/v1/auth/**",
+            "/api/v1/auth",
+            "/api/v1/video/**",
+            "/api/v1/video/video-paging-by-category**",
+            "/api/v1/video/change-status/*"
+    };
     @Bean
     public AuthenticationProvider authenticationProvider() {
         final DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();

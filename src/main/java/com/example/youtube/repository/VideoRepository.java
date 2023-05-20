@@ -15,7 +15,7 @@ public interface VideoRepository extends CrudRepository<VideoEntity, String>,
     @Transactional
     @Modifying
     @Query("update VideoEntity set viewCount=:viewCount where id=:id")
-    VideoEntity videoViewCountById(@Param("id") String id, @Param("viewCount") Integer viewCount);
+    int videoViewCountById(@Param("id") String id, @Param("viewCount") Integer viewCount);
 
     @Query("select v from VideoEntity v where v.id=:id and v.status='PRIVATE'")
     Optional<VideoEntity> getById(@Param("id") String id);

@@ -19,7 +19,6 @@ public class CategoryController {
 
     @PostMapping("/private")
     public ResponseEntity<?> create(@RequestBody CategoryRequestDTO dto) {
-        //
         return ResponseEntity.ok(categoryService.create(dto));
     }
 
