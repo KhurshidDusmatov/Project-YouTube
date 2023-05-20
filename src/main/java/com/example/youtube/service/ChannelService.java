@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.swing.text.StyledEditorKit;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -98,4 +99,11 @@ public class ChannelService {
         return null;
     }
 
+    public List<ChannelEntity> getChanelByProfileId(Integer profileId) {
+        List<ChannelEntity> channels = channelRepository.getChannelByProfileId(profileId);
+        if (channels.isEmpty()){
+            throw new ItemNotFoundException("Item  not found");
+        }
+        return channels;
+    }
 }

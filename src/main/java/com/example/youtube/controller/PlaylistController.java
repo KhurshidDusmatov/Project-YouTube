@@ -53,4 +53,23 @@ public class PlaylistController {
         Page<PlayListInfoDTO> pagination = playlistService.pagination(page, size);
         return ResponseEntity.ok(pagination);
     }
+    @GetMapping("private/get-users-playlist")
+    public ResponseEntity<?> getUsersPlayList(@RequestParam("userId") Integer userId){
+        return ResponseEntity.ok(playlistService.getUsersPlayList(userId));
+    }
+
+    @GetMapping("get-users-playlist")
+    public ResponseEntity<?> getUsersPlayList(){
+        return ResponseEntity.ok(playlistService.getUsersPlayList());
+    }
+
+    @GetMapping("get-playlist-by-channel")
+    public ResponseEntity<?> getUsersPlayList(@RequestParam("channelId") String channelId){
+        return ResponseEntity.ok(playlistService.getPlayListByChannelId(channelId));
+    }
+
+    @GetMapping("get-playlist-by-id")
+    public ResponseEntity<?> getPlayListById(@RequestParam("id") Integer id){
+        return ResponseEntity.ok(playlistService.getPlayListById(id));
+    }
 }

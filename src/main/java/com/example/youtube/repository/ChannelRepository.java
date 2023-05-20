@@ -8,6 +8,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
+import java.util.Optional;
+
 public interface ChannelRepository extends CrudRepository<ChannelEntity,String> {
     @Transactional
     @Modifying
@@ -23,4 +26,7 @@ public interface ChannelRepository extends CrudRepository<ChannelEntity,String> 
     @Modifying
     @Query("update ChannelEntity set bannerId=:photo where id=:id")
     Boolean updateBanner(@Param("photo") String photo, @Param("id") String id);
+
+    @Query("from ChannelEntity where profileId =:profileId")
+    List<ChannelEntity> getChannelByProfileId(@Param("profileId") Integer profileId);
 }
