@@ -24,6 +24,7 @@ public class VideoService {
     private final PlaylistService playlistService;
 
     private final ProfileService profileService;
+    private final ChannelService channelService;
 
     public VideoEntity get(String id) {
         Optional<VideoEntity> optional = videoRepository.findById(id);
@@ -175,5 +176,12 @@ public class VideoService {
             list.add(videoPlayListInfo);
         }
         return new PageImpl<>(list, pageable, totalCount);
+    }
+    public VideoLikeRequestDTO getVideoLikeRequestDto(VideoEntity video) {
+        VideoLikeRequestDTO dto=new VideoLikeRequestDTO();
+        dto.setId(video.getId());
+        dto.setName(video.getTitle());
+        dto.setDto(channelService.getChanelVideoLikeRequestDto(video.getChannel()));
+        return dto;
     }
 }
