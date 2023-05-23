@@ -13,3 +13,7 @@ GET localhost:8080/api/v1/attach/public/getById/7e6ad6dd-44a7-457c-b5f0-05d5eaff
 
 ### Download
 GET localhost:8080/api/v1/attach/public/download/7e6ad6dd-44a7-457c-b5f0-05d5eaff6312.jpeg
+
+### Delete attach
+DELETE localhost:8080/api/v1/attach/private/deleteById/ec665ea2-5e41-4209-b2ca-bbf78f9d9425
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQ4MzA3MjQsImVtYWlsIjoic290aWJvbGRpeWV2YXppemJlazg2QGdtYWlsLmNvbSIsInJvbGUiOiJST0xFX1VTRVIiLCJleHAiOjE2ODQ5MTcxMjQsImlzcyI6Ikt1bnV6IHRlc3QgcG9ydGFsaSJ9.67k7cxPs4nmS61lJidRkXiKZTQjmLIQ-iWzmc9INkWxJWkSfJ-46yNN_MEk7LR0YCR_4DOqQGQSoqfdislxx5g

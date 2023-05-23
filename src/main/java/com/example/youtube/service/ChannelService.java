@@ -2,8 +2,10 @@ package com.example.youtube.service;
 
 import com.example.youtube.config.security.CustomUserDetails;
 import com.example.youtube.config.security.CustomUserDetailsService;
+import com.example.youtube.dto.attach.AttachDTO;
 import com.example.youtube.dto.channel.ChanelVideoLikeRequestDTO;
 import com.example.youtube.dto.channel.ChannelDTO;
+import com.example.youtube.entity.AttachEntity;
 import com.example.youtube.entity.ChannelEntity;
 import com.example.youtube.enums.GeneralStatus;
 import com.example.youtube.exps.AppBadRequestException;
@@ -11,9 +13,11 @@ import com.example.youtube.exps.ItemNotFoundException;
 import com.example.youtube.repository.ChannelRepository;
 import com.example.youtube.util.SpringSecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 import javax.swing.text.StyledEditorKit;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -31,12 +35,12 @@ public class ChannelService {
         Integer userId = SpringSecurityUtil.getProfileId();
         ChannelEntity entity = new ChannelEntity();
         entity.setName(channelDTO.getName());
-        entity.setBanner(attachService.get(channelDTO.getBannerId()));
+        attachService.get(channelDTO.getBannerId());
         entity.setBannerId(channelDTO.getBannerId());
-        entity.setPhoto(attachService.get(channelDTO.getPhotoId()));
+        attachService.get(channelDTO.getPhotoId());
         entity.setPhotoId(channelDTO.getPhotoId());
         entity.setDescription(channelDTO.getDescription());
-        entity.setProfile(profileService.get(userId));
+        profileService.get(userId);
         entity.setProfileId(userId);
         entity.setStatus(GeneralStatus.ACTIVE);
         entity.setId(UUID.randomUUID().toString());
@@ -45,7 +49,7 @@ public class ChannelService {
         return channelDTO;
     }
 
-    public Boolean update(String id, ChannelDTO channelDTO) {
+    public Integer update(String id, ChannelDTO channelDTO) {
         Integer userId = SpringSecurityUtil.getProfileId();
         ChannelEntity entity = get(id);
         if (!entity.getProfileId().equals(userId) || !entity.getStatus().equals(GeneralStatus.ACTIVE)) {
@@ -109,6 +113,21 @@ public class ChannelService {
         }
         return channels;
     }
+    public Page<ChannelDTO> paginationWithDate(int page, int size) {
+        Sort sort = Sort.by(Sort.Direction.DESC, "name");
+        Pageable paging = PageRequest.of(page - 1, size, sort);
+        Page<ChannelEntity> pageObj = channelRepository.findAll(paging);
+
+        Long totalCount = pageObj.getTotalElements();
+        List<ChannelEntity> entityList = pageObj.getContent();
+        List<ChannelDTO> dtoList = new LinkedList<>();
+        for (ChannelEntity entity : entityList) {
+            ChannelDTO dto = toChannelDTO(entity);
+            dtoList.add(dto);
+        }
+        Page<ChannelDTO> response = new PageImpl<ChannelDTO>(dtoList, paging, totalCount);
+        return response;
+    }
     public Boolean updateStatus(String id){
         Integer userId = SpringSecurityUtil.getProfileId();
         ChannelEntity entity = get(id);
@@ -116,9 +135,9 @@ public class ChannelService {
             throw new AppBadRequestException("Channel required");
         }
         if (entity.getStatus().equals(GeneralStatus.ACTIVE)){
-        return channelRepository.updateStatus(GeneralStatus.BLOCK,entity.getId());
+             return channelRepository.updateStatus(GeneralStatus.BLOCK,entity.getId());
         }else if (entity.getStatus().equals(GeneralStatus.BLOCK)){
-            return channelRepository.updateStatus(GeneralStatus.BLOCK, entity.getId());
+            return channelRepository.updateStatus(GeneralStatus.ACTIVE, entity.getId());
         }
         return false;
     }

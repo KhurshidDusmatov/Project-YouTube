@@ -78,10 +78,10 @@ public class AttachService {
     public Resource download(String fileName) {
         try {
             int lastIndex = fileName.lastIndexOf(".");
-            String id = fileName.substring(0, lastIndex+1);
-            AttachEntity attachEntity = get(fileName);
+            String id = fileName.substring(0, lastIndex);
+            AttachEntity attachEntity = get(id);
 
-            Path file = Paths.get("attaches/" + attachEntity.getPath() + "/"+id+"/" + fileName);
+            Path file = Paths.get("attaches/" + attachEntity.getPath() + "/"+id+"."+attachEntity.getExtension());
             Resource resource = new UrlResource(file.toUri());
             if (resource.exists() || resource.isReadable()) {
                 return resource;
@@ -109,7 +109,7 @@ public class AttachService {
         }
         return byId.get();
     }
-    public Page<AttachDTO> paginationWithName(int page, int size) {
+    public Page<AttachDTO> paginationWithDate(int page, int size) {
         Sort sort = Sort.by(Sort.Direction.DESC, "createdDate");
         Pageable paging = PageRequest.of(page - 1, size, sort);
         Page<AttachEntity> pageObj = attachRepository.findAll(paging);

@@ -4,6 +4,7 @@ import com.example.youtube.dto.attach.AttachDTO;
 import com.example.youtube.dto.channel.ChannelDTO;
 import com.example.youtube.service.ChannelService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,6 +32,12 @@ public class ChannelController {
     public ResponseEntity<?> updateBanner(@PathVariable("id") String id,
                                          @RequestBody ChannelDTO dto) {
         return ResponseEntity.ok(channelService.updateBanner(id,dto));
+    }
+    @GetMapping("/private/pagination/")
+    public ResponseEntity<Page<ChannelDTO>> pagination(@RequestParam(value = "page", defaultValue = "1") int page,
+                                        @RequestParam(value = "size", defaultValue = "4") int size){
+        Page<ChannelDTO> pagination = channelService.paginationWithDate(page, size);
+        return ResponseEntity.ok(pagination);
     }
     @GetMapping("/private/getById/{id}")
     public ResponseEntity<ChannelDTO> getById(@PathVariable("id") String id){

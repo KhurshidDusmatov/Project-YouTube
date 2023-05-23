@@ -38,7 +38,7 @@ public class SecurityConfig {
         http.authorizeHttpRequests()
                 .requestMatchers(AUTH_WHITELIST).permitAll()
                 .requestMatchers("/api/v1/channel/private/**").hasRole("USER")
-                .requestMatchers("/api/v1/attach/private/deleteById/**").hasRole("ADMIN")
+                .requestMatchers("/api/v1/attach/private/deleteById/**").hasAnyRole("ADMIN","USER")
                 .requestMatchers("/api/v1/channel/private/update/**").hasRole("USER")
                 .requestMatchers("/api/v1/channel/private/update_photo/**").hasRole("USER")
                 .requestMatchers("/api/v1/*/private/**").hasRole("ADMIN")
