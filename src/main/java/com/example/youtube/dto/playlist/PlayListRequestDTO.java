@@ -9,14 +9,14 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class PlayListRequestDTO {
-    @NotBlank
+public class    PlayListRequestDTO {
+    @NotNull
     private String channelId;
-    @NotBlank
+    @NotNull
     private String name;
-    @NotBlank
+    @NotNull
     private String description;
-    @NotBlank
+    @NotNull
     private VisibleStatus status;
     @NotNull
     private Integer orderNum;

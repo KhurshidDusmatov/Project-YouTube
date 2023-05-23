@@ -20,24 +20,20 @@ public class PlaylistController {
 
     @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody @Valid PlayListRequestDTO dto) {
-        Integer prtId = SpringSecurityUtil.getProfileId();
-        PlayListInfoDTO result = playlistService.create(dto, prtId);
+        Boolean result = playlistService.create(dto);
         return ResponseEntity.ok(result);
     }
 
     @PutMapping("/update")
     public ResponseEntity<?> update(@RequestBody @Valid PlayListRequestDTO dto,
                                     @RequestParam("id") Integer id) {
-        Integer prtId = SpringSecurityUtil.getProfileId();
-        PlayListInfoDTO result = playlistService.update(dto,id, prtId);
+        Boolean result =  playlistService.update(dto,id);
         return ResponseEntity.ok(result);
     }
 
     @PutMapping("/update-status")
-    public ResponseEntity<?> updateStatus(@RequestBody @Valid PlayListUpdateStatusDTO dto,
-                                          @RequestParam("id") Integer id) {
-        Integer prtId = SpringSecurityUtil.getProfileId();
-        return ResponseEntity.ok(playlistService.updateStatus(dto, prtId));
+    public ResponseEntity<?> updateStatus(@RequestBody @Valid PlayListUpdateStatusDTO dto) {
+        return ResponseEntity.ok(playlistService.updateStatus(dto));
     }
 
     @DeleteMapping("/delete")

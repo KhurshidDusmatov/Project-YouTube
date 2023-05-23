@@ -31,23 +31,26 @@ public class PlaylistService {
     private final PlayListVideoService playListVideoService;
 
 
-    public PlayListInfoDTO create(PlayListRequestDTO dto, Integer prtId) {
+    public Boolean create(PlayListRequestDTO dto) {
+        Integer prtId = SpringSecurityUtil.getProfileId();
         checkRequiredOwner(dto.getChannelId(), prtId);
         PlayListEntity entity = new PlayListEntity();
         PlayListEntity result = toEntity(dto, entity);
         playlistRepository.save(result);
-        return toDTO(result);
+        return true;
     }
 
-    public PlayListInfoDTO update(PlayListRequestDTO dto, Integer id, Integer prtId) {
+    public Boolean update(PlayListRequestDTO dto, Integer id) {
+        Integer prtId = SpringSecurityUtil.getProfileId();
         checkRequiredOwner(dto.getChannelId(), prtId);
         PlayListEntity entity = get(id);
         PlayListEntity result = toEntity(dto, entity);
         playlistRepository.save(result);
-        return toDTO(result);
+        return true;
     }
 
-    public Boolean updateStatus(PlayListUpdateStatusDTO dto, Integer prtId) {
+    public Boolean updateStatus(PlayListUpdateStatusDTO dto) {
+        Integer prtId = SpringSecurityUtil.getProfileId();
         checkRequiredOwner(get(dto.getId()).getChannelId(), prtId);
         playlistRepository.updateStatus(dto.getStatus(), dto.getId());
         return true;
