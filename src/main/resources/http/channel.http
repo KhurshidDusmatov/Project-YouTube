@@ -1,11 +1,29 @@
 ### Create Channel
 POST localhost:8080/api/v1/channel/private/create
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQ0MjA3OTQsImVtYWlsIjoiVVNFUkBtYWlsLnJ1Iiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTY4NDUwNzE5NCwiaXNzIjoiS3VudXogdGVzdCBwb3J0YWxpIn0.vsDk2O_hbvNNYmwI3OnskMxex6GI5nm-q2CmR7okO6cwj8yD1I6JZ7EpZhoBl1dJM3snj5FoIb9tlOgzyxDgxA
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQ4MzA3MjQsImVtYWlsIjoic290aWJvbGRpeWV2YXppemJlazg2QGdtYWlsLmNvbSIsInJvbGUiOiJST0xFX1VTRVIiLCJleHAiOjE2ODQ5MTcxMjQsImlzcyI6Ikt1bnV6IHRlc3QgcG9ydGFsaSJ9.67k7cxPs4nmS61lJidRkXiKZTQjmLIQ-iWzmc9INkWxJWkSfJ-46yNN_MEk7LR0YCR_4DOqQGQSoqfdislxx5g
 Content-Type: application/json
 
 {
-  "name": "music",
+  "name": "videos",
   "photoId": "7e6ad6dd-44a7-457c-b5f0-05d5eaff6312",
   "bannerId": "7e6ad6dd-44a7-457c-b5f0-05d5eaff6312",
-  "description": "new chanel"
+  "description": "second"
+}
+
+### Get By id
+
+GET localhost:8080/api/v1/channel/private/getById/a0edaa6c-8957-471d-90cf-48df2b796959
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQ4MzA3MjQsImVtYWlsIjoic290aWJvbGRpeWV2YXppemJlazg2QGdtYWlsLmNvbSIsInJvbGUiOiJST0xFX1VTRVIiLCJleHAiOjE2ODQ5MTcxMjQsImlzcyI6Ikt1bnV6IHRlc3QgcG9ydGFsaSJ9.67k7cxPs4nmS61lJidRkXiKZTQjmLIQ-iWzmc9INkWxJWkSfJ-46yNN_MEk7LR0YCR_4DOqQGQSoqfdislxx5g
+
+
+### Update channel By id
+PUT localhost:8080/api/v1/channel/private/update/a0edaa6c-8957-471d-90cf-48df2b796959
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQ4MzA3MjQsImVtYWlsIjoic290aWJvbGRpeWV2YXppemJlazg2QGdtYWlsLmNvbSIsInJvbGUiOiJST0xFX1VTRVIiLCJleHAiOjE2ODQ5MTcxMjQsImlzcyI6Ikt1bnV6IHRlc3QgcG9ydGFsaSJ9.67k7cxPs4nmS61lJidRkXiKZTQjmLIQ-iWzmc9INkWxJWkSfJ-46yNN_MEk7LR0YCR_4DOqQGQSoqfdislxx5g
+Content-Type: application/json
+
+{
+  "name": "videos and photos",
+  "photoId": "7e6ad6dd-44a7-457c-b5f0-05d5eaff6312",
+  "bannerId": "7e6ad6dd-44a7-457c-b5f0-05d5eaff6312",
+  "description": "second1"
 }

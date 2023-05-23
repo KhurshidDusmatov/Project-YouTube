@@ -2,10 +2,12 @@ package com.example.youtube.controller;
 
 import com.example.youtube.dto.attach.AttachDTO;
 import com.example.youtube.dto.attach.AttachRequestDTO;
+import com.example.youtube.dto.playlist.PlayListInfoDTO;
 import com.example.youtube.service.AttachService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -39,4 +41,10 @@ AttachController {
       return ResponseEntity.ok(attachService.delete(id));
    }
 
+   @GetMapping("/private/pagination/")
+   public ResponseEntity<?> pagination(@RequestParam(value = "page", defaultValue = "1") int page,
+                                       @RequestParam(value = "size", defaultValue = "4") int size){
+      Page<AttachDTO> pagination = attachService.paginationWithDate(page, size);
+      return ResponseEntity.ok(pagination);
+   }
 }

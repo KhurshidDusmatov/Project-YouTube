@@ -3,7 +3,7 @@ PUT localhost:8080/api/v1/profile/public/change-password
 Content-Type: application/json
 
 {
-  "email": "moder@gmail.com",
+  "email": "azizbek@gmail.com",
   "oldPassword": "3333",
   "newPassword": "4444"
 }
@@ -14,9 +14,9 @@ Authorization: eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQ1ODQyNjksImVtYWlsIjoic290aWJv
 Content-Type: application/json
 
 {
-  "name": "USER",
-  "surname": "Moderjanov",
-  "email": "user@gmail.ru",
+  "name": "Azizbek",
+  "surname": "Sotiboldiyev",
+  "email": "sotiboldiyevazizbek86@gamil.com",
   "password": "3333",
   "role": "ROLE_USER"
 }

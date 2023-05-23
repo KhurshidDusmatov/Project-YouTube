@@ -3,11 +3,11 @@ POST localhost:8080/api/v1/auth/registration
 Content-Type:  application/json
 
 {
-  "name": "Bobir",
-  "surname": "Baxshilloyev",
-  "phone": "+998936529454",
-  "email": "USER@mail.ru",
-  "password": "12345"
+  "name": "Azizbek",
+  "surname": "Sotiboldiyev",
+  "phone": "+998903987780",
+  "email": "sotiboldiyevazizbek69@gmail.com",
+  "password": "123456"
 }
 
 ### login
@@ -15,6 +15,7 @@ POST localhost:8080/api/v1/auth
 Content-Type: application/json
 
 {
-  "email": "USER@mail.ru",
-  "password": "12345"
+  "email": "sotiboldiyevazizbek86@gmail.com",
+  "password": "123456"
 }
+###  "jwt": "eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQ2MDAwNTUsImVtYWlsIjoic290aWJvbGRpeWV2YXppemJlazg2QGdtYWlsLmNvbSIsInJvbGUiOiJST0xFX1VTRVIiLCJleHAiOjE2ODQ2ODY0NTUsImlzcyI6Ikt1bnV6IHRlc3QgcG9ydGFsaSJ9.Cmdd8atvPhkPS36Rp-w6f8h6v6BhrCLyXrCKoer6bqse18BhFnSvGjxt9Np-VyGTAU_HJpRzTQGyODLrI1tu9w"
