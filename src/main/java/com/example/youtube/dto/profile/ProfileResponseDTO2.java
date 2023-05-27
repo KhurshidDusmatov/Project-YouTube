@@ -1,6 +1,5 @@
 package com.example.youtube.dto.profile;
 
-import com.example.youtube.dto.attach.AttachDTO;
 import com.example.youtube.dto.attach.AttachResponseDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
